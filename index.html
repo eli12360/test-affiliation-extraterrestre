@@ -7,41 +7,49 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 40px;
             text-align: center;
-        }
-        form {
             background-color: #f4f4f4;
-            padding: 20px;
-            border-radius: 8px;
-            width: 300px;
-            margin: auto;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
         }
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin: 10px 0;
+        h1 {
+            margin-top: 30px;
+        }
+        #container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+            width: 350px;
+            margin: auto;
+        }
+        input, select, button {
+            width: 90%;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
             border: 1px solid #ccc;
-            border-radius: 4px;
         }
         button {
-            background-color: #28a745;
+            background-color: green;
             color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
+            font-weight: bold;
             cursor: pointer;
         }
-        button:hover {
-            background-color: #218838;
-        }
         #resultat {
+            display: none;
             margin-top: 20px;
             padding: 15px;
-            background-color: #e9ecef;
-            border-radius: 8px;
+            background: #dff0d8;
+            border-left: 5px solid green;
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        #reessayer {
             display: none;
+            margin-top: 10px;
+            background-color: red;
         }
     </style>
 </head>
@@ -50,51 +58,74 @@
     <h1>Bienvenue sur le test d'affiliation extraterrestre !</h1>
     <p>Remplissez ce formulaire pour découvrir votre affiliation.</p>
 
-    <form id="affiliationForm">
-        <label for="nom">Nom :</label>
-        <input type="text" id="nom" placeholder="Votre nom">
+    <div id="container">
+        <form id="affiliationForm">
+            <label>Nom :</label>
+            <input type="text" id="nom" required>
 
-        <label for="age">Âge :</label>
-        <input type="number" id="age" placeholder="Votre âge">
+            <label>Âge :</label>
+            <input type="number" id="age" required>
 
-        <label for="yeux">Couleur des yeux :</label>
-        <select id="yeux">
-            <option value="">Sélectionnez</option>
-            <option value="Bleu">Bleu</option>
-            <option value="Vert">Vert</option>
-            <option value="Noisette">Noisette</option>
-            <option value="Marron">Marron</option>
-            <option value="Noir">Noir</option>
-            <option value="Autre">Autre</option>
-        </select>
+            <label>Couleur des yeux :</label>
+            <select id="yeux">
+                <option value="Bleu">Bleu</option>
+                <option value="Vert">Vert</option>
+                <option value="Marron">Marron</option>
+            </select>
 
-        <label for="experience">Expérience spirituelle :</label>
-        <input type="text" id="experience" placeholder="Décrivez votre expérience">
+            <label>Expérience spirituelle :</label>
+            <input type="text" id="experience" required>
 
-        <button type="submit">Envoyer</button>
-    </form>
-
-    <div id="resultat"></div>
+            <button type="submit">Envoyer</button>
+        </form>
+        
+        <div id="resultat"></div>
+        <button id="reessayer">Réessayer</button>
+    </div>
 
     <script>
         document.getElementById("affiliationForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Empêche le rechargement de la page
+            event.preventDefault();
 
-            let nom = document.getElementById("nom").value.trim() || "Non renseigné";
-            let age = document.getElementById("age").value.trim() || "Non renseigné";
-            let yeux = document.getElementById("yeux").value || "Non renseigné";
-            let experience = document.getElementById("experience").value.trim() || "Non renseigné";
+            let nom = document.getElementById("nom").value;
+            let age = document.getElementById("age").value;
+            let yeux = document.getElementById("yeux").value;
+            let experience = document.getElementById("experience").value;
 
-            let resultatDiv = document.getElementById("resultat");
-            resultatDiv.innerHTML = `
+            let affiliation = determinerAffiliation(age, yeux, experience);
+
+            let resultatHTML = `
                 <h2>Résultat de votre affiliation :</h2>
                 <p><strong>Nom :</strong> ${nom}</p>
                 <p><strong>Âge :</strong> ${age} ans</p>
                 <p><strong>Couleur des yeux :</strong> ${yeux}</p>
                 <p><strong>Expérience spirituelle :</strong> ${experience}</p>
+                <h3>Affiliation :</h3>
+                <p>${affiliation}</p>
             `;
-            resultatDiv.style.display = "block";
+
+            document.getElementById("resultat").innerHTML = resultatHTML;
+            document.getElementById("resultat").style.display = "block";
+            document.getElementById("reessayer").style.display = "block";
         });
+
+        document.getElementById("reessayer").addEventListener("click", function() {
+            document.getElementById("affiliationForm").reset();
+            document.getElementById("resultat").style.display = "none";
+            document.getElementById("reessayer").style.display = "none";
+        });
+
+        function determinerAffiliation(age, yeux, experience) {
+            if (age > 40 && yeux === "Bleu" && experience.includes("intense")) {
+                return "Vous êtes affilié aux Pléiadiens, une race spirituelle avancée.";
+            } else if (age < 30 && yeux === "Vert") {
+                return "Vous êtes affilié aux Arcturiens, une race de maîtres de la sagesse.";
+            } else if (yeux === "Marron" && experience.includes("énergétique")) {
+                return "Vous êtes affilié aux Siriens, des êtres connectés aux énergies cosmiques.";
+            } else {
+                return "Aucune affiliation précise trouvée, mais votre connexion aux étoiles est unique !";
+            }
+        }
     </script>
 
 </body>
