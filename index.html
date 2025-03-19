@@ -30,5 +30,24 @@
 
         <button type="submit">Envoyer</button>
     </form>
+<script>
+    document.querySelector("form").addEventListener("submit", function(event) {
+        event.preventDefault(); // Empêche le rechargement de la page
+
+        let nom = document.getElementById("nom").value;
+        let age = document.getElementById("age").value;
+        let yeux = document.getElementById("yeux").value;
+        let experience = document.getElementById("experience").value;
+
+        // Affichage des résultats sur la page
+        let resultat = "<h2>Résultat de votre affiliation :</h2>";
+        resultat += "<p>Nom : " + nom + "</p>";
+        resultat += "<p>Âge : " + age + " ans</p>";
+        resultat += "<p>Couleur des yeux : " + yeux + "</p>";
+        resultat += "<p>Expérience spirituelle : " + experience + "</p>";
+
+        document.body.innerHTML += resultat;
+    });
+</script>
 </body>
 </html>
