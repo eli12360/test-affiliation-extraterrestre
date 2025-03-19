@@ -6,7 +6,29 @@
     <title>Test d'Affiliation Extraterrestre</title>
 </head>
 <body>
-    <h1>Bienvenue sur le test d'affiliation extraterrestre !</h1>
-    <p>Ce site est en cours de construction...</p>
+   <h1>Bienvenue sur le test d'affiliation extraterrestre !</h1>
+    <p>Répondez aux questions ci-dessous pour découvrir votre lignée.</p>
+    
+    <form>
+        <label for="nom">Quel est votre prénom ?</label>
+        <input type="text" id="nom" name="nom"><br><br>
+
+        <label for="age">Quel est votre âge ?</label>
+        <input type="number" id="age" name="age"><br><br>
+
+        <label for="yeux">Quelle est la couleur de vos yeux ?</label>
+        <select id="yeux" name="yeux">
+            <option value="bleu">Bleu</option>
+            <option value="vert">Vert</option>
+            <option value="noisette">Noisette</option>
+            <option value="marron">Marron</option>
+            <option value="autre">Autre</option>
+        </select><br><br>
+
+        <label for="experience">Avez-vous déjà eu des expériences spirituelles ou étranges ?</label>
+        <textarea id="experience" name="experience" rows="4" cols="50"></textarea><br><br>
+
+        <button type="submit">Envoyer</button>
+    </form>
 </body>
 </html>
