@@ -67,5 +67,25 @@
         console.error("Formulaire introuvable !");
     }
 </script>
+    <script>
+    document.getElementById("affiliationForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Empêche le rechargement de la page
+
+        let nom = document.getElementById("nom").value;
+        let age = document.getElementById("age").value;
+        let yeux = document.getElementById("yeux").value;
+        let experience = document.getElementById("experience").value;
+
+        let resultat = `
+            <h2>Résultat de votre affiliation :</h2>
+            <p><strong>Nom :</strong> ${nom}</p>
+            <p><strong>Âge :</strong> ${age} ans</p>
+            <p><strong>Couleur des yeux :</strong> ${yeux}</p>
+            <p><strong>Expérience spirituelle :</strong> ${experience}</p>
+        `;
+
+        document.getElementById("resultat").innerHTML = resultat;
+    });
+</script>
 </body>
 </html>
