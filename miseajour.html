@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test d'Affiliation Extraterrestre</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; padding: 20px; }
+        .container { max-width: 600px; margin: auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0px 0px 10px gray; }
+        .question { margin: 20px 0; }
+        button { padding: 10px; background: deepskyblue; color: white; border: none; cursor: pointer; }
+        button:hover { background: darkblue; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test d'Affiliation Extraterrestre</h1>
+        <p>Répondez aux questions ci-dessous pour découvrir votre affiliation galactique.</p>
+        
+        <div id="questions"></div>
+        
+        <button onclick="calculerAffiliation()">Voir Résultat</button>
+        
+        <h2 id="resultat"></h2>
+    </div>
+    
+    <script>
+        const questions = [
+            { text: "Quelle est la couleur de vos yeux ?", options: ["Bleu", "Vert", "Noisette", "Marron", "Autre"] },
+            { text: "Ressentez-vous une énergie subtile en vous ?", options: ["Oui", "Non", "Parfois"] },
+            { text: "Avez-vous déjà eu des expériences de sortie hors du corps ?", options: ["Oui", "Non"] },
+            { text: "Vous sentez-vous attiré par une culture ancienne spécifique ?", options: ["Égyptiens", "Atlantes", "Mayas", "Nordiques", "Autre"] },
+            { text: "Avez-vous des capacités extrasensorielles ?", options: ["Clairvoyance", "Magnétisme", "Télépathie", "Non"] },
+        ];
+        
+        function afficherQuestions() {
+            const questionDiv = document.getElementById("questions");
+            questions.forEach((q, index) => {
+                let div = document.createElement("div");
+                div.classList.add("question");
+                div.innerHTML = `<p>${q.text}</p>`;
+                q.options.forEach(opt => {
+                    div.innerHTML += `<label><input type="radio" name="q${index}" value="${opt}"> ${opt}</label><br>`;
+                });
+                questionDiv.appendChild(div);
+            });
+        }
+        
+        function calculerAffiliation() {
+            let scores = { "Pléiadiens": 0, "Arcturiens": 0, "Lyriens": 0, "Nordiques": 0, "Drah’Zors": 0 };
+            let reponses = document.querySelectorAll("input[type='radio']:checked");
+            
+            reponses.forEach(rep => {
+                if (rep.value === "Bleu" || rep.value === "Égyptiens" || rep.value === "Clairvoyance") {
+                    scores["Pléiadiens"] += 10;
+                }
+                if (rep.value === "Vert" || rep.value === "Atlantes" || rep.value === "Télépathie") {
+                    scores["Arcturiens"] += 10;
+                }
+                if (rep.value === "Noisette" || rep.value === "Mayas" || rep.value === "Magnétisme") {
+                    scores["Lyriens"] += 10;
+                }
+                if (rep.value === "Marron" || rep.value === "Nordiques") {
+                    scores["Nordiques"] += 10;
+                }
+            });
+            
+            let raceMax = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+            document.getElementById("resultat").innerText = `Votre affiliation principale est : ${raceMax}`;
+        }
+        
+        afficherQuestions();
+    </script>
+</body>
+</html>
