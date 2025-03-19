@@ -31,23 +31,41 @@
         <button type="submit">Envoyer</button>
     </form>
 <script>
-    document.querySelector("form").addEventListener("submit", function(event) {
-        event.preventDefault(); // Empêche le rechargement de la page
+    // Vérifier si le formulaire existe
+    let formulaire = document.querySelector("form");
 
-        let nom = document.getElementById("nom").value;
-        let age = document.getElementById("age").value;
-        let yeux = document.getElementById("yeux").value;
-        let experience = document.getElementById("experience").value;
+    if (formulaire) {
+        formulaire.addEventListener("submit", function(event) {
+            event.preventDefault(); // Empêche le rechargement de la page
 
-        // Affichage des résultats sur la page
-        let resultat = "<h2>Résultat de votre affiliation :</h2>";
-        resultat += "<p>Nom : " + nom + "</p>";
-        resultat += "<p>Âge : " + age + " ans</p>";
-        resultat += "<p>Couleur des yeux : " + yeux + "</p>";
-        resultat += "<p>Expérience spirituelle : " + experience + "</p>";
+            let nom = document.getElementById("nom") ? document.getElementById("nom").value : "Non renseigné";
+            let age = document.getElementById("age") ? document.getElementById("age").value : "Non renseigné";
+            let yeux = document.getElementById("yeux") ? document.getElementById("yeux").value : "Non renseigné";
+            let experience = document.getElementById("experience") ? document.getElementById("experience").value : "Non renseigné";
 
-        document.body.innerHTML += resultat;
-    });
+            // Vérifier si la div d'affichage des résultats existe, sinon la créer
+            let resultatDiv = document.getElementById("resultat");
+            if (!resultatDiv) {
+                resultatDiv = document.createElement("div");
+                resultatDiv.id = "resultat";
+                document.body.appendChild(resultatDiv);
+            }
+
+            // Construire le texte de résultat
+            let resultat = `
+                <h2>Résultat de votre affiliation :</h2>
+                <p><strong>Nom :</strong> ${nom}</p>
+                <p><strong>Âge :</strong> ${age} ans</p>
+                <p><strong>Couleur des yeux :</strong> ${yeux}</p>
+                <p><strong>Expérience spirituelle :</strong> ${experience}</p>
+            `;
+
+            // Ajouter les résultats dans la div prévue
+            resultatDiv.innerHTML = resultat;
+        });
+    } else {
+        console.error("Formulaire introuvable !");
+    }
 </script>
 </body>
 </html>
