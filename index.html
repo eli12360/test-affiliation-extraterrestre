@@ -73,56 +73,69 @@
 
     <script>
         document.getElementById("affiliationForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            
-            let nom = document.getElementById("nom").value;
-            let age = parseInt(document.getElementById("age").value);
-            let poids = parseInt(document.getElementById("poids").value);
-            let taille = parseInt(document.getElementById("taille").value);
-            let morphologie = document.getElementById("morphologie").value;
-            let yeux = document.getElementById("yeux").value;
-            let experience = document.getElementById("experience").value;
-            let art = document.getElementById("art").value;
+        event.preventDefault();
+        
+        let nom = document.getElementById("nom").value;
+        let age = parseInt(document.getElementById("age").value);
+        let poids = parseInt(document.getElementById("poids").value);
+        let taille = parseInt(document.getElementById("taille").value);
+        let morphologie = document.getElementById("morphologie").value;
+        let yeux = document.getElementById("yeux").value;
+        let experience = document.getElementById("experience").value;
+        let art = document.getElementById("art").value;
 
-            let affiliation = "Affiliation non définie.";
+        let affiliation = "Affiliation non définie.";
 
-            if (experience === "Avancé" && art === "Musique") {
-                affiliation = "Vous êtes affilié aux Arcturiens, experts en vibrations sonores.";
-            } else if (morphologie === "Musclé" && yeux === "Vert") {
-                affiliation = "Vous êtes affilié aux Végaliens, protecteurs et guérisseurs.";
-            } else if (poids < 60 && taille > 175) {
-                affiliation = "Vous êtes affilié aux Pléiadiens, êtres élancés et spirituels.";
-            } else if (art === "Écriture" && experience === "Intermédiaire") {
-                affiliation = "Vous êtes affilié aux Lyriens, philosophes et créateurs.";
-            } else if (morphologie === "Fort" && yeux === "Marron") {
-                affiliation = "Vous êtes affilié aux Siriens, guerriers et sages.";
-            } else if (experience === "Débutant" && art === "Théâtre") {
-                affiliation = "Vous êtes affilié aux Andromédiens, explorateurs de l'âme.";
-            } else if (taille > 190 && poids > 80) {
-                affiliation = "Vous êtes affilié aux Altaïriens, géants pacifiques.";
-            } else if (morphologie === "Enrobé" && yeux === "Noisette") {
-                affiliation = "Vous êtes affilié aux Cassiopéens, êtres bienveillants et enseignants.";
-            } else if (age > 50 && experience === "Avancé") {
-                affiliation = "Vous êtes affilié aux Anciens, gardiens de la sagesse cosmique.";
-            }
+        // Nouvelle logique plus flexible
+        if (experience === "Avancé" && yeux === "Bleu" && taille > 170) {
+            affiliation = "Vous êtes affilié aux Pléiadiens, êtres lumineux et guides spirituels.";
+        } 
+        else if (experience === "Avancé" && art === "Musique") {
+            affiliation = "Vous êtes affilié aux Arcturiens, experts en vibrations sonores.";
+        } 
+        else if (morphologie === "Musclé" && yeux === "Vert") {
+            affiliation = "Vous êtes affilié aux Végaliens, protecteurs et guérisseurs.";
+        } 
+        else if (art === "Écriture" || art === "Peinture") {
+            affiliation = "Vous êtes affilié aux Lyriens, philosophes et créateurs.";
+        } 
+        else if (art === "Théâtre" || art === "Cinéma") {
+            affiliation = "Vous êtes affilié aux Andromédiens, explorateurs de l'âme.";
+        } 
+        else if (taille > 190 && poids > 80) {
+            affiliation = "Vous êtes affilié aux Altaïriens, géants pacifiques.";
+        } 
+        else if (morphologie === "Fort" && yeux === "Marron") {
+            affiliation = "Vous êtes affilié aux Siriens, guerriers et sages.";
+        } 
+        else if (age > 50 && experience === "Avancé") {
+            affiliation = "Vous êtes affilié aux Anciens, gardiens de la sagesse cosmique.";
+        } 
+        else if (experience === "Débutant" && art === "Théâtre") {
+            affiliation = "Vous êtes affilié aux Andromédiens, explorateurs de l'âme.";
+        } 
+        else if (morphologie === "Enrobé" && yeux === "Noisette") {
+            affiliation = "Vous êtes affilié aux Cassiopéens, êtres bienveillants et enseignants.";
+        }
 
-            document.getElementById("resultat").style.display = "block";
-            document.getElementById("resultat").innerHTML = `
-                <div class='alert alert-success p-4'>
-                    <h2>Résultat de votre affiliation :</h2>
-                    <p><strong>Nom :</strong> ${nom}</p>
-                    <p><strong>Âge :</strong> ${age} ans</p>
-                    <p><strong>Poids :</strong> ${poids} kg</p>
-                    <p><strong>Taille :</strong> ${taille} cm</p>
-                    <p><strong>Apparence morphologique :</strong> ${morphologie}</p>
-                    <p><strong>Couleur des yeux :</strong> ${yeux}</p>
-                    <p><strong>Expérience spirituelle :</strong> ${experience}</p>
-                    <p><strong>Goût artistique :</strong> ${art}</p>
-                    <p><strong>Affiliation :</strong> ${affiliation}</p>
-                    <button onclick='location.reload()' class='btn btn-danger mt-3'>Réessayer</button>
-                </div>
-            `;
-        });
+        // Affichage des résultats
+        document.getElementById("resultat").style.display = "block";
+        document.getElementById("resultat").innerHTML = `
+            <div class='alert alert-success p-4'>
+                <h2>Résultat de votre affiliation :</h2>
+                <p><strong>Nom :</strong> ${nom}</p>
+                <p><strong>Âge :</strong> ${age} ans</p>
+                <p><strong>Poids :</strong> ${poids} kg</p>
+                <p><strong>Taille :</strong> ${taille} cm</p>
+                <p><strong>Apparence morphologique :</strong> ${morphologie}</p>
+                <p><strong>Couleur des yeux :</strong> ${yeux}</p>
+                <p><strong>Expérience spirituelle :</strong> ${experience}</p>
+                <p><strong>Goût artistique :</strong> ${art}</p>
+                <p><strong>Affiliation :</strong> ${affiliation}</p>
+                <button onclick='location.reload()' class='btn btn-danger mt-3'>Réessayer</button>
+            </div>
+        `;
+    });
     </script>
 </body>
 </html>
