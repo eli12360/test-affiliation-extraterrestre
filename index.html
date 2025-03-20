@@ -7,126 +7,108 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
             background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-        h1 {
-            margin-top: 30px;
-        }
-        #container {
+        .container {
             background: white;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px gray;
-            width: 350px;
-            margin: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
         }
         input, select, button {
-            width: 90%;
+            width: 100%;
             padding: 10px;
-            margin: 5px;
-            border-radius: 5px;
+            margin-top: 5px;
             border: 1px solid #ccc;
+            border-radius: 5px;
         }
         button {
-            background-color: green;
+            background-color: #28a745;
             color: white;
-            font-weight: bold;
+            font-size: 16px;
+            border: none;
             cursor: pointer;
+            margin-top: 15px;
         }
-        #resultat {
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
             display: none;
             margin-top: 20px;
             padding: 15px;
-            background: #dff0d8;
-            border-left: 5px solid green;
-            animation: fadeIn 1s ease-in;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        #reessayer {
-            display: none;
-            margin-top: 10px;
-            background-color: red;
+            background: #d4edda;
+            border-radius: 5px;
+            border: 1px solid #c3e6cb;
+            text-align: left;
         }
     </style>
 </head>
 <body>
-
-    <h1>Bienvenue sur le test d'affiliation extraterrestre !</h1>
-    <p>Remplissez ce formulaire pour découvrir votre affiliation.</p>
-
-    <div id="container">
+    <div class="container">
+        <h1>Test d'Affiliation Extraterrestre</h1>
+        <p>Remplissez ce formulaire pour découvrir votre affiliation.</p>
+        
         <form id="affiliationForm">
-            <label>Nom :</label>
+            <label for="nom">Nom :</label>
             <input type="text" id="nom" required>
-
-            <label>Âge :</label>
+            
+            <label for="age">Âge :</label>
             <input type="number" id="age" required>
-
-            <label>Couleur des yeux :</label>
+            
+            <label for="yeux">Couleur des yeux :</label>
             <select id="yeux">
                 <option value="Bleu">Bleu</option>
                 <option value="Vert">Vert</option>
                 <option value="Marron">Marron</option>
+                <option value="Gris">Gris</option>
             </select>
-
-            <label>Expérience spirituelle :</label>
+            
+            <label for="experience">Expérience spirituelle :</label>
             <input type="text" id="experience" required>
-
+            
             <button type="submit">Envoyer</button>
         </form>
         
-        <div id="resultat"></div>
-        <button id="reessayer">Réessayer</button>
+        <div class="result" id="resultat"></div>
     </div>
-
+    
     <script>
         document.getElementById("affiliationForm").addEventListener("submit", function(event) {
             event.preventDefault();
-
             let nom = document.getElementById("nom").value;
             let age = document.getElementById("age").value;
             let yeux = document.getElementById("yeux").value;
             let experience = document.getElementById("experience").value;
-
-            let affiliation = determinerAffiliation(age, yeux, experience);
-
+            
             let resultatHTML = `
                 <h2>Résultat de votre affiliation :</h2>
                 <p><strong>Nom :</strong> ${nom}</p>
                 <p><strong>Âge :</strong> ${age} ans</p>
                 <p><strong>Couleur des yeux :</strong> ${yeux}</p>
                 <p><strong>Expérience spirituelle :</strong> ${experience}</p>
-                <h3>Affiliation :</h3>
-                <p>${affiliation}</p>
             `;
-
+            
             document.getElementById("resultat").innerHTML = resultatHTML;
             document.getElementById("resultat").style.display = "block";
-            document.getElementById("reessayer").style.display = "block";
         });
-
-        document.getElementById("reessayer").addEventListener("click", function() {
-            document.getElementById("affiliationForm").reset();
-            document.getElementById("resultat").style.display = "none";
-            document.getElementById("reessayer").style.display = "none";
-        });
-
-        function determinerAffiliation(age, yeux, experience) {
-            if (age > 40 && yeux === "Bleu" && experience.includes("intense")) {
-                return "Vous êtes affilié aux Pléiadiens, une race spirituelle avancée.";
-            } else if (age < 30 && yeux === "Vert") {
-                return "Vous êtes affilié aux Arcturiens, une race de maîtres de la sagesse.";
-            } else if (yeux === "Marron" && experience.includes("énergétique")) {
-                return "Vous êtes affilié aux Siriens, des êtres connectés aux énergies cosmiques.";
-            } else {
-                return "Aucune affiliation précise trouvée, mais votre connexion aux étoiles est unique !";
-            }
-        }
     </script>
-
 </body>
 </html>
