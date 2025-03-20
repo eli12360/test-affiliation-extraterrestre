@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résultat - Affiliation Extraterrestre</title>
+    <style>
+        body { font-family: Arial, sans-serif; color: white; text-align: center; padding: 50px; }
+        #result-container { background: rgba(0, 0, 0, 0.7); padding: 20px; border-radius: 10px; display: inline-block; }
+        h2 { margin-bottom: 20px; }
+    </style>
+</head>
+<body id="body">
+
+    <div id="result-container">
+        <h2>Résultat de votre affiliation</h2>
+        <p><strong>Nom :</strong> <span id="nom"></span></p>
+        <p><strong>Âge :</strong> <span id="age"></span> ans</p>
+        <p><strong>Affiliation :</strong> <span id="affiliation"></span></p>
+    </div>
+
+    <script>
+        function getQueryParams() {
+            let params = new URLSearchParams(window.location.search);
+            return {
+                nom: params.get("nom"),
+                age: params.get("age"),
+                morphologie: params.get("morphologie"),
+                yeux: params.get("yeux"),
+                spiritualite: params.get("spiritualite"),
+                art: params.get("art")
+            };
+        }
+
+        function afficherResultat() {
+            let data = getQueryParams();
+            document.getElementById("nom").innerText = data.nom;
+            document.getElementById("age").innerText = data.age;
+
+            let affiliation = "Pléiadiens";
+            let bgImage = "url('pleiadiens.jpg')";
+
+            if (data.yeux === "Vert") { affiliation = "Arcturiens"; bgImage = "url('arcturiens.jpg')"; }
+            if (data.morphologie === "Athlétique") { affiliation = "Draconiens"; bgImage = "url('draconiens.jpg')"; }
+
+            document.getElementById("affiliation").innerText = affiliation;
+            document.body.style.backgroundImage = bgImage;
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundPosition = "center";
+        }
+
+        afficherResultat();
+    </script>
+
+</body>
+</html>
