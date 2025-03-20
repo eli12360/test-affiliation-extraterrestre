@@ -12,7 +12,6 @@
         input, select { width: 100%; padding: 8px; margin-top: 5px; }
         button { background: #4CAF50; color: white; padding: 10px; margin-top: 20px; border: none; cursor: pointer; }
         button:hover { background: #45a049; }
-        #result { margin-top: 20px; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
     </style>
 </head>
 <body>
@@ -77,13 +76,11 @@
             <option value="Rébellion">Rébellion</option>
         </select>
 
-        <button type="button" onclick="analyserAffiliation()">Analyser mon Affiliation</button>
+        <button type="button" onclick="envoyerResultat()">Envoyer</button>
     </form>
 
-    <div id="result"></div>
-
     <script>
-        function analyserAffiliation() {
+        function envoyerResultat() {
             let nom = document.getElementById("nom").value;
             let age = document.getElementById("age").value;
             let poids = document.getElementById("poids").value;
@@ -95,38 +92,9 @@
             let technologie = document.getElementById("technologie").value;
             let autorite = document.getElementById("autorite").value;
 
-            let affiliations = {
-                "Pléiadiens": 0,
-                "Draconiens": 0,
-                "Arcturiens": 0,
-                "Siriens": 0,
-                "Anunnaki": 0
-            };
-
-            if (spiritualite === "Avancé") affiliations["Pléiadiens"] += 20;
-            if (yeux === "Bleu" || yeux === "Vert") affiliations["Arcturiens"] += 15;
-            if (morphologie === "Athlétique") affiliations["Draconiens"] += 20;
-            if (art === "Musique" || art === "Peinture") affiliations["Siriens"] += 10;
-            if (technologie === "Oui") affiliations["Anunnaki"] += 15;
-            if (autorite === "Rébellion") affiliations["Pléiadiens"] += 10;
-            if (autorite === "Respect total") affiliations["Draconiens"] += 10;
-
-            let affiliationFinale = Object.keys(affiliations).reduce((a, b) => affiliations[a] > affiliations[b] ? a : b);
-            let pourcentage = affiliations[affiliationFinale];
-
-            let resultDiv = document.getElementById("result");
-            resultDiv.innerHTML = `
-                <h3>Résultat de votre affiliation :</h3>
-                <p><strong>Nom :</strong> ${nom}</p>
-                <p><strong>Âge :</strong> ${age} ans</p>
-                <p><strong>Poids :</strong> ${poids} kg</p>
-                <p><strong>Taille :</strong> ${taille} cm</p>
-                <p><strong>Apparence morphologique :</strong> ${morphologie}</p>
-                <p><strong>Couleur des yeux :</strong> ${yeux}</p>
-                <p><strong>Expérience spirituelle :</strong> ${spiritualite}</p>
-                <p><strong>Goût artistique :</strong> ${art}</p>
-                <p><strong>Affiliation extraterrestre dominante :</strong> <b>${affiliationFinale}</b> (${pourcentage}%)</p>
-            `;
+            let params = `nom=${nom}&age=${age}&poids=${poids}&taille=${taille}&morphologie=${morphologie}&yeux=${yeux}&spiritualite=${spiritualite}&art=${art}&technologie=${technologie}&autorite=${autorite}`;
+            
+            window.location.href = "resultat.html?" + params;
         }
     </script>
 
