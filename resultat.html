@@ -3,84 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Résultat d'affiliation</title>
+    <title>Résultat d'Affiliation</title>
     <style>
         body {
+            margin: 0;
+            padding: 0;
             font-family: Arial, sans-serif;
             text-align: center;
             color: white;
+            background: url('space-background.jpg') no-repeat center center fixed;
             background-size: cover;
-            background-position: center;
+            overflow: hidden;
         }
-
-        #result-container {
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: rgba(0, 0, 0, 0.7);
             padding: 20px;
             border-radius: 10px;
-            display: inline-block;
             width: 80%;
             max-width: 600px;
-            margin: auto;
         }
-
-        @keyframes scrollText {
-            from { transform: translateX(100%); }
-            to { transform: translateX(-100%); }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
         }
-
-        #prompteur {
-            font-size: 16px;
-            margin-top: 20px;
-            height: 50px;
+        .scroll-text {
+            position: absolute;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 150px;
             overflow: hidden;
             white-space: nowrap;
-            display: block;
-            animation: scrollText 10s linear infinite;
+            font-size: 16px;
+        }
+        .scroll-content {
+            display: inline-block;
+            animation: scrollAnimation 30s linear infinite;
+        }
+        @keyframes scrollAnimation {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(-100%);
+            }
         }
     </style>
 </head>
-<body id="body">
-
-    <div id="result-container">
-        <h2>Résultat de votre affiliation</h2>
-        <p><strong>Nom :</strong> <span id="nom"></span></p>
+<body>
+    <div class="container">
+        <h1>Résultat de votre affiliation</h1>
+        <img id="profileImage" class="profile-img" src="" alt="Profil Extraterrestre">
+        <h2 id="name"></h2>
         <p><strong>Âge :</strong> <span id="age"></span> ans</p>
         <p><strong>Affiliation :</strong> <span id="affiliation"></span></p>
-        <p id="description"></p>
-        <div id="prompteur">
-            <span id="message-scroll"></span>
-        </div>
     </div>
-
+    <div class="scroll-text">
+        <div class="scroll-content" id="story"></div>
+    </div>
     <script>
-        function getParams() {
-            let params = new URLSearchParams(window.location.search);
-            return {
-                nom: params.get("nom"),
-                age: params.get("age"),
-                yeux: params.get("yeux"),
-                spiritualite: params.get("spiritualite")
-            };
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('nom');
+        const age = urlParams.get('age');
+        const affiliation = urlParams.get('affiliation');
+
+        document.getElementById('name').textContent = name;
+        document.getElementById('age').textContent = age;
+        document.getElementById('affiliation').textContent = affiliation;
+        
+        const affiliationData = {
+            'Arcturiens': {
+                image: 'arcturien.jpg',
+                story: "Les Arcturiens sont des êtres de lumière très évolués, issus du système d'Arcturus. Leur mission est d'aider l'humanité à élever sa conscience spirituelle et énergétique. Ils enseignent la paix intérieure et l'harmonie cosmique."
+            },
+            'Pléiadiens': {
+                image: 'pleiadien.jpg',
+                story: "Les Pléiadiens sont des guides bienveillants originaires des Pléiades. Ils assistent les âmes humaines dans leur éveil spirituel en leur enseignant l'amour inconditionnel et la connexion universelle."
+            },
+            'Draconiens': {
+                image: 'draconien.jpg',
+                story: "Les Draconiens sont des êtres puissants issus de la constellation du Dragon. Ils maîtrisent les forces énergétiques et sont souvent en quête de domination. Il est crucial d'apprendre à équilibrer ces énergies avec sagesse."
+            },
+            'Andromédiens': {
+                image: 'andromedien.jpg',
+                story: "Les Andromédiens sont des explorateurs cosmiques dotés d'une immense sagesse. Ils possèdent une grande connaissance des dimensions et de la nature de la réalité. Leur objectif est d'aider les êtres à transcender les illusions de la matière."
+            }
+        };
+        
+        if (affiliationData[affiliation]) {
+            document.getElementById('profileImage').src = affiliationData[affiliation].image;
+            document.getElementById('story').textContent = affiliationData[affiliation].story;
         }
-
-        function afficherResultat() {
-            let data = getParams();
-            document.getElementById("nom").innerText = data.nom;
-            document.getElementById("age").innerText = data.age;
-
-            let affiliation = "Arcturiens";
-            let bgImage = "arcturiens.jpg";
-            let description = "Vous êtes un être spirituel avancé en quête de sagesse cosmique.";
-            let message = "Méditez chaque jour pour vous connecter aux dimensions supérieures.";
-
-            document.getElementById("affiliation").innerText = affiliation;
-            document.getElementById("description").innerText = description;
-            document.getElementById("message-scroll").innerText = message;
-            document.body.style.backgroundImage = `url('${bgImage}')`;
-        }
-
-        afficherResultat();
     </script>
-
 </body>
 </html>
