@@ -4,149 +4,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test d'Affiliation Extraterrestre</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; background-color: #f4f4f4; }
+        h2 { color: #333; }
+        form { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        label { display: block; margin-top: 10px; }
+        input, select { width: 100%; padding: 8px; margin-top: 5px; }
+        button { background: #4CAF50; color: white; padding: 10px; margin-top: 20px; border: none; cursor: pointer; }
+        button:hover { background: #45a049; }
+        #result { margin-top: 20px; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">Bienvenue sur le test d'affiliation extraterrestre !</h1>
-        <p class="text-center">Remplissez ce formulaire pour découvrir votre affiliation.</p>
-        <div class="card p-4 mx-auto" style="max-width: 500px;">
-            <form id="affiliationForm">
-                <label for="nom" class="form-label">Nom :</label>
-                <input type="text" id="nom" class="form-control" required>
 
-                <label for="age" class="form-label mt-2">Âge :</label>
-                <input type="number" id="age" class="form-control" required>
+    <h2>Test d'Affiliation Extraterrestre</h2>
+    <form id="affiliationForm">
+        <label>Nom :</label>
+        <input type="text" id="nom" required>
 
-                <label for="poids" class="form-label mt-2">Poids (kg) :</label>
-                <input type="number" id="poids" class="form-control" required>
+        <label>Âge :</label>
+        <input type="number" id="age" required>
 
-                <label for="taille" class="form-label mt-2">Taille (cm) :</label>
-                <input type="number" id="taille" class="form-control" min="100" max="250" required>
+        <label>Poids (kg) :</label>
+        <input type="number" id="poids" required>
 
-                <label for="morphologie" class="form-label mt-2">Apparence morphologique :</label>
-                <select id="morphologie" class="form-control" required>
-                    <option value="Mince">Mince</option>
-                    <option value="Normal">Normal</option>
-                    <option value="Musclé">Musclé</option>
-                    <option value="Enrobé">Enrobé</option>
-                    <option value="Fort">Fort</option>
-                </select>
+        <label>Taille (cm) :</label>
+        <input type="number" id="taille" required>
 
-                <label for="yeux" class="form-label mt-2">Couleur des yeux :</label>
-                <select id="yeux" class="form-control" required>
-                    <option value="Bleu">Bleu</option>
-                    <option value="Vert">Vert</option>
-                    <option value="Noisette">Noisette</option>
-                    <option value="Marron">Marron</option>
-                </select>
+        <label>Apparence morphologique :</label>
+        <select id="morphologie">
+            <option value="Mince">Mince</option>
+            <option value="Athlétique">Athlétique</option>
+            <option value="Enrobé">Enrobé</option>
+            <option value="Autre">Autre</option>
+        </select>
 
-                <label for="experience" class="form-label mt-2">Expérience spirituelle :</label>
-                <select id="experience" class="form-control" required>
-                    <option value="Débutant">Débutant</option>
-                    <option value="Intermédiaire">Intermédiaire</option>
-                    <option value="Avancé">Avancé</option>
-                </select>
+        <label>Couleur des yeux :</label>
+        <select id="yeux">
+            <option value="Bleu">Bleu</option>
+            <option value="Vert">Vert</option>
+            <option value="Noisette">Noisette</option>
+            <option value="Marron">Marron</option>
+            <option value="Autre">Autre</option>
+        </select>
 
-                <label for="art" class="form-label mt-2">Goût artistique :</label>
-                <select id="art" class="form-control" required>
-                    <option value="Musique">Musique</option>
-                    <option value="Peinture">Peinture</option>
-                    <option value="Écriture">Écriture</option>
-                    <option value="Danse">Danse</option>
-                    <option value="Théâtre">Théâtre</option>
-                    <option value="Cinéma">Cinéma</option>
-                    <option value="Autre">Autre</option>
-                </select>
+        <label>Expérience spirituelle :</label>
+        <select id="spiritualite">
+            <option value="Débutant">Débutant</option>
+            <option value="Intermédiaire">Intermédiaire</option>
+            <option value="Avancé">Avancé</option>
+        </select>
 
-                <div class="form-check mt-3">
-                    <input class="form-check-input" type="checkbox" id="consent" required>
-                    <label class="form-check-label" for="consent">J'accepte l'utilisation de mes données</label>
-                </div>
-                
-                <button type="submit" class="btn btn-success w-100 mt-3" id="submitBtn">Envoyer</button>
-            </form>
-        </div>
-    </div>
+        <label>Goût artistique :</label>
+        <select id="art">
+            <option value="Musique">Musique</option>
+            <option value="Peinture">Peinture</option>
+            <option value="Écriture">Écriture</option>
+            <option value="Autre">Autre</option>
+        </select>
 
-    <div id="resultat" class="container mt-4 text-center" style="display: none;"></div>
+        <label>Attrait pour les technologies avancées :</label>
+        <select id="technologie">
+            <option value="Oui">Oui</option>
+            <option value="Non">Non</option>
+            <option value="Curieux mais prudent">Curieux mais prudent</option>
+        </select>
+
+        <label>Relation aux figures d’autorité :</label>
+        <select id="autorite">
+            <option value="Respect total">Respect total</option>
+            <option value="Indépendant">Indépendant</option>
+            <option value="Rébellion">Rébellion</option>
+        </select>
+
+        <button type="button" onclick="analyserAffiliation()">Analyser mon Affiliation</button>
+    </form>
+
+    <div id="result"></div>
 
     <script>
-        document.getElementById("affiliationForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-        
-        let nom = document.getElementById("nom").value;
-        let age = parseInt(document.getElementById("age").value);
-        let poids = parseInt(document.getElementById("poids").value);
-        let taille = parseInt(document.getElementById("taille").value);
-        let morphologie = document.getElementById("morphologie").value;
-        let yeux = document.getElementById("yeux").value;
-        let experience = document.getElementById("experience").value;
-        let art = document.getElementById("art").value;
+        function analyserAffiliation() {
+            let nom = document.getElementById("nom").value;
+            let age = document.getElementById("age").value;
+            let poids = document.getElementById("poids").value;
+            let taille = document.getElementById("taille").value;
+            let morphologie = document.getElementById("morphologie").value;
+            let yeux = document.getElementById("yeux").value;
+            let spiritualite = document.getElementById("spiritualite").value;
+            let art = document.getElementById("art").value;
+            let technologie = document.getElementById("technologie").value;
+            let autorite = document.getElementById("autorite").value;
 
-        let affiliation = "Affiliation non définie.";
-        
-        // Ajout d'un score pour pondérer plusieurs critères
-        let scorePleiadien = 0;
-        let scoreArcturien = 0;
-        let scoreLyriens = 0;
-        let scoreAndromediens = 0;
-        let scoreSiriens = 0;
-        let scoreVégaliens = 0;
+            let affiliations = {
+                "Pléiadiens": 0,
+                "Draconiens": 0,
+                "Arcturiens": 0,
+                "Siriens": 0,
+                "Anunnaki": 0
+            };
 
-        // Attributs physiques
-        if (taille > 175 && morphologie === "Mince") scorePleiadien += 2;
-        if (taille < 175 && morphologie === "Fort") scoreSiriens += 2;
-        if (poids > 80 && taille > 190) scoreVégaliens += 2;
-        if (morphologie === "Enrobé") scoreLyriens += 1;
+            if (spiritualite === "Avancé") affiliations["Pléiadiens"] += 20;
+            if (yeux === "Bleu" || yeux === "Vert") affiliations["Arcturiens"] += 15;
+            if (morphologie === "Athlétique") affiliations["Draconiens"] += 20;
+            if (art === "Musique" || art === "Peinture") affiliations["Siriens"] += 10;
+            if (technologie === "Oui") affiliations["Anunnaki"] += 15;
+            if (autorite === "Rébellion") affiliations["Pléiadiens"] += 10;
+            if (autorite === "Respect total") affiliations["Draconiens"] += 10;
 
-        // Expérience spirituelle
-        if (experience === "Avancé") scoreArcturien += 3;
-        if (experience === "Intermédiaire") scoreLyriens += 1;
-        if (experience === "Débutant") scoreSiriens += 1;
+            let affiliationFinale = Object.keys(affiliations).reduce((a, b) => affiliations[a] > affiliations[b] ? a : b);
+            let pourcentage = affiliations[affiliationFinale];
 
-        // Goût artistique
-        if (art === "Musique") scoreArcturien += 2;
-        if (art === "Écriture") scoreLyriens += 2;
-        if (art === "Théâtre" || art === "Cinéma") scoreAndromediens += 2;
-
-        // Couleur des yeux
-        if (yeux === "Bleu") scorePleiadien += 2;
-        if (yeux === "Vert") scoreVégaliens += 2;
-        if (yeux === "Noisette") scoreLyriens += 1;
-        if (yeux === "Marron") scoreSiriens += 1;
-
-        // Âge et sagesse
-        if (age > 50) scoreSiriens += 2;
-        if (age > 60) scoreArcturien += 2;
-
-        // Définition finale selon le score le plus élevé
-        let maxScore = Math.max(scorePleiadien, scoreArcturien, scoreLyriens, scoreAndromediens, scoreSiriens, scoreVégaliens);
-        if (maxScore === scorePleiadien) affiliation = "Vous êtes affilié aux Pléiadiens, guides spirituels et enseignants cosmiques.";
-        if (maxScore === scoreArcturien) affiliation = "Vous êtes affilié aux Arcturiens, maîtres de la sagesse multidimensionnelle.";
-        if (maxScore === scoreLyriens) affiliation = "Vous êtes affilié aux Lyriens, philosophes et artistes visionnaires.";
-        if (maxScore === scoreAndromediens) affiliation = "Vous êtes affilié aux Andromédiens, explorateurs et conteurs intergalactiques.";
-        if (maxScore === scoreSiriens) affiliation = "Vous êtes affilié aux Siriens, protecteurs et guerriers de lumière.";
-        if (maxScore === scoreVégaliens) affiliation = "Vous êtes affilié aux Végaliens, bâtisseurs et guérisseurs."
-
-        // Affichage des résultats
-        document.getElementById("resultat").style.display = "block";
-        document.getElementById("resultat").innerHTML = `
-            <div class='alert alert-success p-4'>
-                <h2>Résultat de votre affiliation :</h2>
+            let resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = `
+                <h3>Résultat de votre affiliation :</h3>
                 <p><strong>Nom :</strong> ${nom}</p>
                 <p><strong>Âge :</strong> ${age} ans</p>
                 <p><strong>Poids :</strong> ${poids} kg</p>
                 <p><strong>Taille :</strong> ${taille} cm</p>
                 <p><strong>Apparence morphologique :</strong> ${morphologie}</p>
                 <p><strong>Couleur des yeux :</strong> ${yeux}</p>
-                <p><strong>Expérience spirituelle :</strong> ${experience}</p>
+                <p><strong>Expérience spirituelle :</strong> ${spiritualite}</p>
                 <p><strong>Goût artistique :</strong> ${art}</p>
-                <p><strong>Affiliation :</strong> ${affiliation}</p>
-                <button onclick='location.reload()' class='btn btn-danger mt-3'>Réessayer</button>
-            </div>
-        `;
-    });
+                <p><strong>Affiliation extraterrestre dominante :</strong> <b>${affiliationFinale}</b> (${pourcentage}%)</p>
+            `;
+        }
     </script>
+
 </body>
 </html>
