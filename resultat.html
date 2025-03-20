@@ -3,146 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Résultat d'Affiliation</title>
+    <title>Résultat de votre affiliation</title>
+    <link rel="stylesheet" href="style.css">
     <style>
+        /* Arrière-plan spatial */
         body {
-            margin: 0;
-            padding: 0;
+            background: url('images/space_background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
             font-family: Arial, sans-serif;
             text-align: center;
-            color: white;
-            background: url('space-background.jpg') no-repeat center center fixed;
-            background-size: cover;
             overflow: hidden;
         }
-        .container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.7);
+
+        /* Boîte contenant les résultats */
+        .result-box {
+            background: rgba(0, 0, 0, 0.8);
             padding: 20px;
             border-radius: 10px;
-            width: 80%;
-            max-width: 600px;
+            width: 50%;
+            margin: auto;
+            margin-top: 50px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
         }
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid white;
+
+        /* Image d'affiliation */
+        img {
+            width: 200px;
+            border-radius: 10px;
+            margin-top: 10px;
         }
+
+        /* Texte défilant */
         .scroll-text {
-            position: absolute;
-            bottom: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 150px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
             overflow: hidden;
             white-space: nowrap;
-            font-size: 16px;
+            font-size: 20px;
+            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 0;
         }
-        .scroll-content {
+
+        /* Animation du texte */
+        .scroll-text p {
             display: inline-block;
-            animation: scrollAnimation 30s linear infinite;
+            animation: scroll-left 30s linear infinite;
         }
-        @keyframes scrollAnimation {
-            from {
-                transform: translateY(100%);
-            }
-            to {
-                transform: translateY(-100%);
-            }
+
+        @keyframes scroll-left {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+
+    <div class="result-box">
         <h1>Résultat de votre affiliation</h1>
-        <img id="profileImage" class="profile-img" src="" alt="Profil Extraterrestre">
-        <h2 id="name"></h2>
-        <p><strong>Âge :</strong> <span id="age"></span> ans</p>
-        <p><strong>Affiliation :</strong> <span id="affiliation"></span></p>
+        <p><strong>Nom :</strong> <span id="nom"></span></p>
+        <p><strong>Âge :</strong> <span id="age"></span></p>
+        <p><strong>Poids :</strong> <span id="poids"></span></p>
+        <p><strong>Taille :</strong> <span id="taille"></span></p>
+        <p><strong>Apparence morphologique :</strong> <span id="morphologie"></span></p>
+        <p><strong>Couleur des yeux :</strong> <span id="yeux"></span></p>
+        <p><strong>Expérience spirituelle :</strong> <span id="experience"></span></p>
+        <p><strong>Goût artistique :</strong> <span id="gout"></span></p>
+        <h2>Affiliation : <span id="affiliation"></span></h2>
+        <img id="imageAffiliation" src="" alt="Affiliation extraterrestre">
     </div>
+
     <div class="scroll-text">
-        <div class="scroll-content" id="story"></div>
+        <p id="scroll-content">Bienvenue, voyageur cosmique. Votre affiliation révèle un potentiel unique en vous...</p>
     </div>
+
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const name = urlParams.get('nom');
-        const age = urlParams.get('age');
-        const affiliation = urlParams.get('affiliation');
-
-        document.getElementById('name').textContent = name;
-        document.getElementById('age').textContent = age;
-        document.getElementById('affiliation').textContent = affiliation;
-        
-        const affiliationData = {
-            'Arcturiens': {
-                image: 'arcturien.jpg',
-                story: "Les Arcturiens sont des êtres de lumière très évolués, issus du système d'Arcturus. Leur mission est d'aider l'humanité à élever sa conscience spirituelle et énergétique. Ils enseignent la paix intérieure et l'harmonie cosmique."
-            },
-            'Pléiadiens': {
-                image: 'pleiadien.jpg',
-                story: "Les Pléiadiens sont des guides bienveillants originaires des Pléiades. Ils assistent les âmes humaines dans leur éveil spirituel en leur enseignant l'amour inconditionnel et la connexion universelle."
-            },
-            'Draconiens': {
-                image: 'draconien.jpg',
-                story: "Les Draconiens sont des êtres puissants issus de la constellation du Dragon. Ils maîtrisent les forces énergétiques et sont souvent en quête de domination. Il est crucial d'apprendre à équilibrer ces énergies avec sagesse."
-            },
-            'Andromédiens': {
-                image: 'andromedien.jpg',
-                story: "Les Andromédiens sont des explorateurs cosmiques dotés d'une immense sagesse. Ils possèdent une grande connaissance des dimensions et de la nature de la réalité. Leur objectif est d'aider les êtres à transcender les illusions de la matière."
-            }
-        };
-        
-        if (affiliationData[affiliation]) {
-            document.getElementById('profileImage').src = affiliationData[affiliation].image;
-            document.getElementById('story').textContent = affiliationData[affiliation].story;
+        // Fonction pour récupérer les paramètres de l'URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
         }
+
+        // Récupération des données depuis l'URL
+        const nom = getQueryParam("nom") || "Inconnu";
+        const age = getQueryParam("age") || "N/A";
+        const poids = getQueryParam("poids") || "N/A";
+        const taille = getQueryParam("taille") || "N/A";
+        const morphologie = getQueryParam("morphologie") || "Non définie";
+        const yeux = getQueryParam("yeux") || "Non défini";
+        const experience = getQueryParam("experience") || "Débutant";
+        const gout = getQueryParam("gout") || "Non précisé";
+        const affiliation = getQueryParam("affiliation") || "Affiliation non définie";
+
+        // Définition des images selon l'affiliation
+        const affiliationImages = {
+            "Arcturiens": "images/arcturien.jpg",
+            "Pléiadiens": "images/pleiadien.jpg",
+            "Grands Bleus": "images/grand_bleu.jpg",
+            "Alpha Draconien": "images/alpha_draconien.jpg",
+            "Anunnaki": "images/anunnaki.jpg",
+            "Confédération Galactique": "images/confederation.jpg"
+        };
+
+        // Sélection de l'image correspondant à l'affiliation
+        const imageAffiliation = affiliationImages[affiliation] || "images/default.jpg";
+
+        // Affichage dynamique des résultats
+        document.getElementById("nom").innerText = nom;
+        document.getElementById("age").innerText = age;
+        document.getElementById("poids").innerText = poids + " kg";
+        document.getElementById("taille").innerText = taille + " cm";
+        document.getElementById("morphologie").innerText = morphologie;
+        document.getElementById("yeux").innerText = yeux;
+        document.getElementById("experience").innerText = experience;
+        document.getElementById("gout").innerText = gout;
+        document.getElementById("affiliation").innerText = affiliation;
+        document.getElementById("imageAffiliation").src = imageAffiliation;
+
+        // Messages par affiliation
+        const affiliationMessages = {
+            "Arcturiens": "Les Arcturiens sont des guides spirituels avancés. Ils te conseillent de méditer et d'élever ta fréquence vibratoire pour accéder à une conscience plus lumineuse.",
+            "Pléiadiens": "Les Pléiadiens t'invitent à explorer tes émotions profondes et à utiliser l'énergie de l'amour inconditionnel pour guérir les blessures karmiques.",
+            "Grands Bleus": "Les Grands Bleus, gardiens de l'équilibre cosmique, t'enseignent la sagesse et la patience pour harmoniser ton énergie avec celle de l'univers.",
+            "Alpha Draconien": "Les Alpha Draconiens te rappellent l'importance de la force intérieure et du leadership. Utilise ton charisme pour guider les autres vers l'éveil.",
+            "Anunnaki": "Les Anunnaki t'encouragent à rechercher la connaissance cachée et à explorer les mystères ancestraux qui influencent encore notre civilisation.",
+            "Confédération Galactique": "La Confédération Galactique t'invite à te connecter à l'unité universelle et à œuvrer pour l'élévation spirituelle collective."
+        };
+
+        // Insérer le texte correspondant dans le défilement
+        document.getElementById("scroll-content").innerText = affiliationMessages[affiliation] || "Bienvenue, voyageur cosmique. Ton affiliation révèle un potentiel unique en toi...";
     </script>
-    // Fonction pour récupérer les paramètres de l'URL
-function getQueryParam(param) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(param);
-}
 
-// Récupération des données depuis l'URL
-const nom = getQueryParam("nom") || "Inconnu";
-const age = getQueryParam("age") || "N/A";
-const poids = getQueryParam("poids") || "N/A";
-const taille = getQueryParam("taille") || "N/A";
-const morphologie = getQueryParam("morphologie") || "Non définie";
-const yeux = getQueryParam("yeux") || "Non défini";
-const experience = getQueryParam("experience") || "Débutant";
-const gout = getQueryParam("gout") || "Non précisé";
-const affiliation = getQueryParam("affiliation") || "Affiliation non définie";
-
-// Définition des images selon l'affiliation
-const affiliationImages = {
-    "Arcturiens": "images/arcturien.jpg",
-    "Pléiadiens": "images/pleiadien.jpg",
-    "Grands Bleus": "images/grand_bleu.jpg",
-    "Alpha Draconien": "images/alpha_draconien.jpg",
-    "Anunnaki": "images/anunnaki.jpg",
-    "Confédération Galactique": "images/confederation.jpg"
-};
-
-// Sélection de l'image correspondant à l'affiliation
-const imageAffiliation = affiliationImages[affiliation] || "images/default.jpg";
-
-// Affichage dynamique des résultats
-document.getElementById("nom").innerText = nom;
-document.getElementById("age").innerText = age;
-document.getElementById("poids").innerText = poids + " kg";
-document.getElementById("taille").innerText = taille + " cm";
-document.getElementById("morphologie").innerText = morphologie;
-document.getElementById("yeux").innerText = yeux;
-document.getElementById("experience").innerText = experience;
-document.getElementById("gout").innerText = gout;
-document.getElementById("affiliation").innerText = affiliation;
-document.getElementById("imageAffiliation").src = imageAffiliation;
 </body>
 </html>
