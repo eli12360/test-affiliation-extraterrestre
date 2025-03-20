@@ -22,7 +22,7 @@
                 <input type="number" id="poids" class="form-control" required>
 
                 <label for="taille" class="form-label mt-2">Taille (cm) :</label>
-                <input type="text" id="taille" class="form-control" placeholder="Exemple: 172" required>
+                <input type="number" id="taille" class="form-control" min="100" max="250" required>
 
                 <label for="morphologie" class="form-label mt-2">Apparence morphologique :</label>
                 <select id="morphologie" class="form-control" required>
@@ -78,28 +78,32 @@
             let nom = document.getElementById("nom").value;
             let age = parseInt(document.getElementById("age").value);
             let poids = parseInt(document.getElementById("poids").value);
-            let taille = document.getElementById("taille").value.replace(",", "."); // Correction de la virgule en point
+            let taille = parseInt(document.getElementById("taille").value);
             let morphologie = document.getElementById("morphologie").value;
             let yeux = document.getElementById("yeux").value;
             let experience = document.getElementById("experience").value;
             let art = document.getElementById("art").value;
 
-            let affiliation = "Affiliation non définie.";
-            
+            let affiliation = "Affiliation indéterminée.";
+
             if (experience === "Avancé" && art === "Musique") {
-                affiliation = "Vous êtes affilié aux Arcturiens, une race très avancée en vibration sonore et énergétique.";
+                affiliation = "Vous êtes affilié aux Arcturiens, une race avancée en vibration sonore.";
             } else if (morphologie === "Musclé" && yeux === "Vert") {
                 affiliation = "Vous êtes affilié aux Végaliens, des êtres puissants et bienveillants.";
-            } else if (poids < 60 && parseFloat(taille) > 175) {
+            } else if (poids < 60 && taille > 175) {
                 affiliation = "Vous êtes affilié aux Pléiadiens, une race évoluée à l’apparence élancée.";
             } else if (art === "Écriture" && experience === "Intermédiaire") {
-                affiliation = "Vous êtes affilié aux Lyriens, des êtres philosophes et connectés à l'expression écrite.";
+                affiliation = "Vous êtes affilié aux Lyriens, philosophes et connectés à l'expression écrite.";
             } else if (morphologie === "Fort" && yeux === "Marron") {
-                affiliation = "Vous êtes affilié aux Siriens, une race protectrice et puissante.";
+                affiliation = "Vous êtes affilié aux Siriens, protecteurs et puissants.";
             } else if (experience === "Débutant" && art === "Théâtre") {
-                affiliation = "Vous êtes affilié aux Andromédiens, connus pour leur créativité et leur grande ouverture d'esprit.";
+                affiliation = "Vous êtes affilié aux Andromédiens, créatifs et ouverts d'esprit.";
+            } else if (taille > 190 && poids > 80) {
+                affiliation = "Vous êtes affilié aux Altaïriens, des géants pacifiques.";
+            } else if (morphologie === "Enrobé" && yeux === "Noisette") {
+                affiliation = "Vous êtes affilié aux Cassiopéens, des êtres bienveillants.";
             }
-            
+
             document.getElementById("resultat").style.display = "block";
             document.getElementById("resultat").innerHTML = `
                 <div class='alert alert-success p-4'>
