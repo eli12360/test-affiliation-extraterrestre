@@ -85,38 +85,49 @@
         let art = document.getElementById("art").value;
 
         let affiliation = "Affiliation non définie.";
+        
+        // Ajout d'un score pour pondérer plusieurs critères
+        let scorePleiadien = 0;
+        let scoreArcturien = 0;
+        let scoreLyriens = 0;
+        let scoreAndromediens = 0;
+        let scoreSiriens = 0;
+        let scoreVégaliens = 0;
 
-        // Nouvelle logique plus flexible
-        if (experience === "Avancé" && yeux === "Bleu" && taille > 170) {
-            affiliation = "Vous êtes affilié aux Pléiadiens, êtres lumineux et guides spirituels.";
-        } 
-        else if (experience === "Avancé" && art === "Musique") {
-            affiliation = "Vous êtes affilié aux Arcturiens, experts en vibrations sonores.";
-        } 
-        else if (morphologie === "Musclé" && yeux === "Vert") {
-            affiliation = "Vous êtes affilié aux Végaliens, protecteurs et guérisseurs.";
-        } 
-        else if (art === "Écriture" || art === "Peinture") {
-            affiliation = "Vous êtes affilié aux Lyriens, philosophes et créateurs.";
-        } 
-        else if (art === "Théâtre" || art === "Cinéma") {
-            affiliation = "Vous êtes affilié aux Andromédiens, explorateurs de l'âme.";
-        } 
-        else if (taille > 190 && poids > 80) {
-            affiliation = "Vous êtes affilié aux Altaïriens, géants pacifiques.";
-        } 
-        else if (morphologie === "Fort" && yeux === "Marron") {
-            affiliation = "Vous êtes affilié aux Siriens, guerriers et sages.";
-        } 
-        else if (age > 50 && experience === "Avancé") {
-            affiliation = "Vous êtes affilié aux Anciens, gardiens de la sagesse cosmique.";
-        } 
-        else if (experience === "Débutant" && art === "Théâtre") {
-            affiliation = "Vous êtes affilié aux Andromédiens, explorateurs de l'âme.";
-        } 
-        else if (morphologie === "Enrobé" && yeux === "Noisette") {
-            affiliation = "Vous êtes affilié aux Cassiopéens, êtres bienveillants et enseignants.";
-        }
+        // Attributs physiques
+        if (taille > 175 && morphologie === "Mince") scorePleiadien += 2;
+        if (taille < 175 && morphologie === "Fort") scoreSiriens += 2;
+        if (poids > 80 && taille > 190) scoreVégaliens += 2;
+        if (morphologie === "Enrobé") scoreLyriens += 1;
+
+        // Expérience spirituelle
+        if (experience === "Avancé") scoreArcturien += 3;
+        if (experience === "Intermédiaire") scoreLyriens += 1;
+        if (experience === "Débutant") scoreSiriens += 1;
+
+        // Goût artistique
+        if (art === "Musique") scoreArcturien += 2;
+        if (art === "Écriture") scoreLyriens += 2;
+        if (art === "Théâtre" || art === "Cinéma") scoreAndromediens += 2;
+
+        // Couleur des yeux
+        if (yeux === "Bleu") scorePleiadien += 2;
+        if (yeux === "Vert") scoreVégaliens += 2;
+        if (yeux === "Noisette") scoreLyriens += 1;
+        if (yeux === "Marron") scoreSiriens += 1;
+
+        // Âge et sagesse
+        if (age > 50) scoreSiriens += 2;
+        if (age > 60) scoreArcturien += 2;
+
+        // Définition finale selon le score le plus élevé
+        let maxScore = Math.max(scorePleiadien, scoreArcturien, scoreLyriens, scoreAndromediens, scoreSiriens, scoreVégaliens);
+        if (maxScore === scorePleiadien) affiliation = "Vous êtes affilié aux Pléiadiens, guides spirituels et enseignants cosmiques.";
+        if (maxScore === scoreArcturien) affiliation = "Vous êtes affilié aux Arcturiens, maîtres de la sagesse multidimensionnelle.";
+        if (maxScore === scoreLyriens) affiliation = "Vous êtes affilié aux Lyriens, philosophes et artistes visionnaires.";
+        if (maxScore === scoreAndromediens) affiliation = "Vous êtes affilié aux Andromédiens, explorateurs et conteurs intergalactiques.";
+        if (maxScore === scoreSiriens) affiliation = "Vous êtes affilié aux Siriens, protecteurs et guerriers de lumière.";
+        if (maxScore === scoreVégaliens) affiliation = "Vous êtes affilié aux Végaliens, bâtisseurs et guérisseurs."
 
         // Affichage des résultats
         document.getElementById("resultat").style.display = "block";
