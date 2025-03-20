@@ -84,24 +84,26 @@
             let experience = document.getElementById("experience").value;
             let art = document.getElementById("art").value;
 
-            let affiliation = "Affiliation indéterminée.";
+            let affiliation = "Affiliation non définie.";
 
             if (experience === "Avancé" && art === "Musique") {
-                affiliation = "Vous êtes affilié aux Arcturiens, une race avancée en vibration sonore.";
+                affiliation = "Vous êtes affilié aux Arcturiens, experts en vibrations sonores.";
             } else if (morphologie === "Musclé" && yeux === "Vert") {
-                affiliation = "Vous êtes affilié aux Végaliens, des êtres puissants et bienveillants.";
+                affiliation = "Vous êtes affilié aux Végaliens, protecteurs et guérisseurs.";
             } else if (poids < 60 && taille > 175) {
-                affiliation = "Vous êtes affilié aux Pléiadiens, une race évoluée à l’apparence élancée.";
+                affiliation = "Vous êtes affilié aux Pléiadiens, êtres élancés et spirituels.";
             } else if (art === "Écriture" && experience === "Intermédiaire") {
-                affiliation = "Vous êtes affilié aux Lyriens, philosophes et connectés à l'expression écrite.";
+                affiliation = "Vous êtes affilié aux Lyriens, philosophes et créateurs.";
             } else if (morphologie === "Fort" && yeux === "Marron") {
-                affiliation = "Vous êtes affilié aux Siriens, protecteurs et puissants.";
+                affiliation = "Vous êtes affilié aux Siriens, guerriers et sages.";
             } else if (experience === "Débutant" && art === "Théâtre") {
-                affiliation = "Vous êtes affilié aux Andromédiens, créatifs et ouverts d'esprit.";
+                affiliation = "Vous êtes affilié aux Andromédiens, explorateurs de l'âme.";
             } else if (taille > 190 && poids > 80) {
-                affiliation = "Vous êtes affilié aux Altaïriens, des géants pacifiques.";
+                affiliation = "Vous êtes affilié aux Altaïriens, géants pacifiques.";
             } else if (morphologie === "Enrobé" && yeux === "Noisette") {
-                affiliation = "Vous êtes affilié aux Cassiopéens, des êtres bienveillants.";
+                affiliation = "Vous êtes affilié aux Cassiopéens, êtres bienveillants et enseignants.";
+            } else if (age > 50 && experience === "Avancé") {
+                affiliation = "Vous êtes affilié aux Anciens, gardiens de la sagesse cosmique.";
             }
 
             document.getElementById("resultat").style.display = "block";
