@@ -103,5 +103,46 @@
             document.getElementById('story').textContent = affiliationData[affiliation].story;
         }
     </script>
+    // Fonction pour récupérer les paramètres de l'URL
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+// Récupération des données depuis l'URL
+const nom = getQueryParam("nom") || "Inconnu";
+const age = getQueryParam("age") || "N/A";
+const poids = getQueryParam("poids") || "N/A";
+const taille = getQueryParam("taille") || "N/A";
+const morphologie = getQueryParam("morphologie") || "Non définie";
+const yeux = getQueryParam("yeux") || "Non défini";
+const experience = getQueryParam("experience") || "Débutant";
+const gout = getQueryParam("gout") || "Non précisé";
+const affiliation = getQueryParam("affiliation") || "Affiliation non définie";
+
+// Définition des images selon l'affiliation
+const affiliationImages = {
+    "Arcturiens": "images/arcturien.jpg",
+    "Pléiadiens": "images/pleiadien.jpg",
+    "Grands Bleus": "images/grand_bleu.jpg",
+    "Alpha Draconien": "images/alpha_draconien.jpg",
+    "Anunnaki": "images/anunnaki.jpg",
+    "Confédération Galactique": "images/confederation.jpg"
+};
+
+// Sélection de l'image correspondant à l'affiliation
+const imageAffiliation = affiliationImages[affiliation] || "images/default.jpg";
+
+// Affichage dynamique des résultats
+document.getElementById("nom").innerText = nom;
+document.getElementById("age").innerText = age;
+document.getElementById("poids").innerText = poids + " kg";
+document.getElementById("taille").innerText = taille + " cm";
+document.getElementById("morphologie").innerText = morphologie;
+document.getElementById("yeux").innerText = yeux;
+document.getElementById("experience").innerText = experience;
+document.getElementById("gout").innerText = gout;
+document.getElementById("affiliation").innerText = affiliation;
+document.getElementById("imageAffiliation").src = imageAffiliation;
 </body>
 </html>
