@@ -92,6 +92,12 @@
                 affiliation = "Vous êtes affilié aux Végaliens, des êtres puissants et bienveillants.";
             } else if (poids < 60 && taille > 175) {
                 affiliation = "Vous êtes affilié aux Pléiadiens, une race évoluée à l’apparence élancée.";
+            } else if (art === "Écriture" && experience === "Intermédiaire") {
+                affiliation = "Vous êtes affilié aux Lyriens, des êtres philosophes et connectés à l'expression écrite.";
+            } else if (morphologie === "Fort" && yeux === "Marron") {
+                affiliation = "Vous êtes affilié aux Siriens, une race protectrice et puissante.";
+            } else if (experience === "Débutant" && art === "Théâtre") {
+                affiliation = "Vous êtes affilié aux Andromédiens, connus pour leur créativité et leur grande ouverture d'esprit.";
             }
             
             document.getElementById("resultat").style.display = "block";
