@@ -3,84 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test d'Affiliation Extraterrestre</title>
+    <title>Test d'affiliation extraterrestre</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; background-color: #f4f4f4; }
-        h2 { color: #333; }
-        form { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
-        label { display: block; margin-top: 10px; }
-        input, select { width: 100%; padding: 8px; margin-top: 5px; }
-        button { background: #4CAF50; color: white; padding: 10px; margin-top: 20px; border: none; cursor: pointer; }
-        button:hover { background: #45a049; }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('space-background.jpg'); /* Image de fond spatial */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 50px;
+        }
+
+        #form-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        label, select, input {
+            display: block;
+            margin: 10px auto;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 18px;
+            background: limegreen;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: darkgreen;
+        }
     </style>
 </head>
 <body>
 
-    <h2>Test d'Affiliation Extraterrestre</h2>
-    <form id="affiliationForm">
-        <label>Nom :</label>
-        <input type="text" id="nom" required>
+    <div id="form-container">
+        <h1>Bienvenue sur le test d'affiliation extraterrestre</h1>
+        <form id="testForm">
+            <label>Nom : <input type="text" id="nom" required></label>
+            <label>Âge : <input type="number" id="age" required></label>
+            <label>Poids (kg) : <input type="number" id="poids" required></label>
+            <label>Taille (cm) : <input type="number" id="taille" required></label>
+            <label>Apparence morphologique :
+                <select id="morphologie">
+                    <option value="Mince">Mince</option>
+                    <option value="Athlétique">Athlétique</option>
+                    <option value="Enrobé">Enrobé</option>
+                </select>
+            </label>
+            <label>Couleur des yeux :
+                <select id="yeux">
+                    <option value="Bleu">Bleu</option>
+                    <option value="Vert">Vert</option>
+                    <option value="Noisette">Noisette</option>
+                </select>
+            </label>
+            <label>Expérience spirituelle :
+                <select id="spiritualite">
+                    <option value="Débutant">Débutant</option>
+                    <option value="Intermédiaire">Intermédiaire</option>
+                    <option value="Avancé">Avancé</option>
+                </select>
+            </label>
+            <label>Goût artistique :
+                <select id="art">
+                    <option value="Musique">Musique</option>
+                    <option value="Peinture">Peinture</option>
+                    <option value="Autre">Autre</option>
+                </select>
+            </label>
 
-        <label>Âge :</label>
-        <input type="number" id="age" required>
-
-        <label>Poids (kg) :</label>
-        <input type="number" id="poids" required>
-
-        <label>Taille (cm) :</label>
-        <input type="number" id="taille" required>
-
-        <label>Apparence morphologique :</label>
-        <select id="morphologie">
-            <option value="Mince">Mince</option>
-            <option value="Athlétique">Athlétique</option>
-            <option value="Enrobé">Enrobé</option>
-            <option value="Autre">Autre</option>
-        </select>
-
-        <label>Couleur des yeux :</label>
-        <select id="yeux">
-            <option value="Bleu">Bleu</option>
-            <option value="Vert">Vert</option>
-            <option value="Noisette">Noisette</option>
-            <option value="Marron">Marron</option>
-            <option value="Autre">Autre</option>
-        </select>
-
-        <label>Expérience spirituelle :</label>
-        <select id="spiritualite">
-            <option value="Débutant">Débutant</option>
-            <option value="Intermédiaire">Intermédiaire</option>
-            <option value="Avancé">Avancé</option>
-        </select>
-
-        <label>Goût artistique :</label>
-        <select id="art">
-            <option value="Musique">Musique</option>
-            <option value="Peinture">Peinture</option>
-            <option value="Écriture">Écriture</option>
-            <option value="Autre">Autre</option>
-        </select>
-
-        <label>Attrait pour les technologies avancées :</label>
-        <select id="technologie">
-            <option value="Oui">Oui</option>
-            <option value="Non">Non</option>
-            <option value="Curieux mais prudent">Curieux mais prudent</option>
-        </select>
-
-        <label>Relation aux figures d’autorité :</label>
-        <select id="autorite">
-            <option value="Respect total">Respect total</option>
-            <option value="Indépendant">Indépendant</option>
-            <option value="Rébellion">Rébellion</option>
-        </select>
-
-        <button type="button" onclick="envoyerResultat()">Envoyer</button>
-    </form>
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
 
     <script>
-        function envoyerResultat() {
+        document.getElementById("testForm").addEventListener("submit", function(event) {
+            event.preventDefault();
             let nom = document.getElementById("nom").value;
             let age = document.getElementById("age").value;
             let poids = document.getElementById("poids").value;
@@ -89,13 +96,10 @@
             let yeux = document.getElementById("yeux").value;
             let spiritualite = document.getElementById("spiritualite").value;
             let art = document.getElementById("art").value;
-            let technologie = document.getElementById("technologie").value;
-            let autorite = document.getElementById("autorite").value;
 
-            let params = `nom=${nom}&age=${age}&poids=${poids}&taille=${taille}&morphologie=${morphologie}&yeux=${yeux}&spiritualite=${spiritualite}&art=${art}&technologie=${technologie}&autorite=${autorite}`;
-            
-            window.location.href = "resultat.html?" + params;
-        }
+            let url = `resultat.html?nom=${nom}&age=${age}&poids=${poids}&taille=${taille}&morphologie=${morphologie}&yeux=${yeux}&spiritualite=${spiritualite}&art=${art}`;
+            window.location.href = url;
+        });
     </script>
 
 </body>
