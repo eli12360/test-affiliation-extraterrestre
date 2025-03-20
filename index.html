@@ -4,170 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test d'Affiliation Extraterrestre</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
-         body {
-        font-family: Arial, sans-serif;
-        background-color: #f8f9fa;
-        text-align: center;
-        padding: 20px;
-    }
-    
-    .container {
-        max-width: 500px;
-        margin: auto;
-        padding: 20px;
-        background: #ffffff;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-        font-size: 24px;
-        color: #333;
-    }
-
-    input, select {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        border-radius: 5px;
-        border: 1px solid #ddd;
-    }
-
-    button {
-        background-color: green;
-        color: white;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 10px;
-    }
-
-    button:hover {
-        background-color: darkgreen;
-    }
-
-    #result {
-        display: none;
-        background-color: #dff0d8;
-        padding: 15px;
-        border-radius: 5px;
-        margin-top: 15px;
-    }
-
-    .hidden {
-        display: none;
-    }
-
-    .result-container {
-        background-color: #e8f5e9;
-        padding: 20px;
-        border-radius: 5px;
-        margin-top: 15px;
-        box-shadow: 0px 0px 10px rgba(0, 128, 0, 0.2);
-    }
-
-    .bold {
-        font-weight: bold;
-        color: #333;
-    }
-
-    .retry-btn {
-        background-color: red;
-        margin-top: 10px;
-    }
-
-    .retry-btn:hover {
-        background-color: darkred;
-    }
+        body {
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .result-box {
+            background-color: #d4edda;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Bienvenue sur le test d'affiliation extraterrestre !</h1>
+        <h1 class="mt-4">Bienvenue sur le test d'affiliation extraterrestre !</h1>
         <p>Remplissez ce formulaire pour découvrir votre affiliation.</p>
+        
         <form id="affiliationForm">
-            <label>Nom : <input type="text" id="nom" required></label><br>
-            <label>Âge : <input type="number" id="age" required></label><br>
-            <label>Couleur des yeux :
-                <select id="yeux">
+            <div class="mb-3">
+                <label for="nom" class="form-label">Nom :</label>
+                <input type="text" id="nom" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="age" class="form-label">Âge :</label>
+                <input type="number" id="age" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="yeux" class="form-label">Couleur des yeux :</label>
+                <select id="yeux" class="form-select" required>
                     <option value="Bleu">Bleu</option>
                     <option value="Vert">Vert</option>
                     <option value="Noisette">Noisette</option>
-                    <option value="Autre">Autre</option>
+                    <option value="Gris">Gris</option>
                 </select>
-            </label><br>
-            <label>Expérience spirituelle : <input type="text" id="experience" required></label><br>
-            <button type="submit">Envoyer</button>
+            </div>
+            <div class="mb-3">
+                <label for="experience" class="form-label">Expérience spirituelle :</label>
+                <select id="experience" class="form-select" required>
+                    <option value="novice">Novice</option>
+                    <option value="sensible">Sensible</option>
+                    <option value="médium">Médium</option>
+                    <option value="avancé">Avancé</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success">Envoyer</button>
         </form>
-        <div id="result" class="result"></div>
+        
+        <div id="resultat" class="result-box" style="display:none;"></div>
     </div>
 
     <script>
         document.getElementById("affiliationForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Empêche le rechargement de la page
+            event.preventDefault();
+            let nom = document.getElementById("nom").value;
+            let age = parseInt(document.getElementById("age").value);
+            let yeux = document.getElementById("yeux").value;
+            let experience = document.getElementById("experience").value;
 
-    let nom = document.getElementById("nom").value;
-    let age = document.getElementById("age").value;
-    let yeux = document.getElementById("yeux").value;
-    let experience = document.getElementById("experience").value;
-
-    let affiliation = determinerAffiliation(age, yeux, experience); // Fonction pour déterminer l'affiliation
-
-    let resultHTML = `
-        <div class="result-container">
-            <h2>Résultat de votre affiliation :</h2>
-            <p><span class="bold">Nom :</span> ${nom}</p>
-            <p><span class="bold">Âge :</span> ${age} ans</p>
-            <p><span class="bold">Couleur des yeux :</span> ${yeux}</p>
-            <p><span class="bold">Expérience spirituelle :</span> ${experience}</p>
-            <p><span class="bold">Affiliation :</span> ${affiliation}</p>
-        </div>
-        <button class="retry-btn" onclick="resetForm()">Réessayer</button>
-    `;
-
-    document.getElementById("result").innerHTML = resultHTML;
-    document.getElementById("result").style.display = "block";
-    document.getElementById("affiliationForm").style.display = "none";
-});
-
-// Fonction pour réinitialiser le formulaire
-function resetForm() {
-    document.getElementById("affiliationForm").reset();
-    document.getElementById("affiliationForm").style.display = "block";
-    document.getElementById("result").style.display = "none";
-}
-
-// Fonction pour déterminer l'affiliation en fonction des choix
-function determinerAffiliation(age, yeux, experience) {
-    if (yeux === "Bleu" && experience === "intense") {
-        return "Vous êtes affilié aux Pléiadiens, une race spirituelle avancée.";
-    } else if (yeux === "Vert" && experience === "éveillé") {
-        return "Vous êtes affilié aux Arcturiens, porteurs de sagesse cosmique.";
-    } else if (age < 30 && experience === "débutant") {
-        return "Vous êtes en cours d'affiliation avec les Syriens, en quête d'illumination.";
-    } else {
-        return "Affiliation indéterminée. Vous êtes un explorateur cosmique en quête de votre essence.";
-    }
-}
+            let affiliation = "";
+            
+            // Logique d'affiliation améliorée
+            if (age < 30 && yeux === "Bleu" && experience === "novice") {
+                affiliation = "Vous êtes affilié aux Pléiadiens, une race spirituelle et bienveillante.";
+            } else if (age >= 30 && age < 50 && yeux === "Vert" && experience === "sensible") {
+                affiliation = "Vous êtes affilié aux Arcturiens, des guides interstellaires évolués.";
+            } else if (age >= 40 && yeux === "Noisette" && experience === "médium") {
+                affiliation = "Vous êtes affilié aux Siriens, une race avancée dans la sagesse cosmique.";
+            } else if (age > 50 && experience === "avancé") {
+                affiliation = "Vous êtes affilié aux Anciens de l'Univers, les gardiens des mémoires stellaires.";
+            } else {
+                affiliation = "Affiliation non standard. Vous êtes un explorateur cosmique en quête de vérité !";
+            }
+            
+            document.getElementById("resultat").innerHTML = `
+                <h2>Résultat de votre affiliation :</h2>
+                <p><strong>Nom :</strong> ${nom}</p>
+                <p><strong>Âge :</strong> ${age} ans</p>
+                <p><strong>Couleur des yeux :</strong> ${yeux}</p>
+                <p><strong>Expérience spirituelle :</strong> ${experience}</p>
+                <p><strong>Affiliation :</strong> ${affiliation}</p>
+                <button onclick="window.location.reload()" class="btn btn-danger">Réessayer</button>
+            `;
+            document.getElementById("resultat").style.display = "block";
+        });
     </script>
-    <div id="partage">
-    <h3>Partagez ce test avec vos amis :</h3>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https://eli12360.github.io/test-affiliation-extraterrestre/" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" width="40">
-    </a>
-    <a href="https://twitter.com/intent/tweet?url=https://eli12360.github.io/test-affiliation-extraterrestre/&text=Découvrez%20votre%20affiliation%20extraterrestre!" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/fr/c/c8/Twitter_Bird.svg" alt="Twitter" width="40">
-    </a>
-    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://eli12360.github.io/test-affiliation-extraterrestre/" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" width="40">
-    </a>
-    <a href="https://api.whatsapp.com/send?text=Découvrez%20votre%20affiliation%20extraterrestre%20:%20https://eli12360.github.io/test-affiliation-extraterrestre/" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="40">
-    </a>
-</div>
-
 </body>
 </html>
