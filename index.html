@@ -22,7 +22,7 @@
                 <input type="number" id="poids" class="form-control" required>
 
                 <label for="taille" class="form-label mt-2">Taille (cm) :</label>
-                <input type="number" id="taille" class="form-control" required>
+                <input type="text" id="taille" class="form-control" placeholder="Exemple: 172" required>
 
                 <label for="morphologie" class="form-label mt-2">Apparence morphologique :</label>
                 <select id="morphologie" class="form-control" required>
@@ -76,9 +76,9 @@
             event.preventDefault();
             
             let nom = document.getElementById("nom").value;
-            let age = document.getElementById("age").value;
-            let poids = document.getElementById("poids").value;
-            let taille = document.getElementById("taille").value;
+            let age = parseInt(document.getElementById("age").value);
+            let poids = parseInt(document.getElementById("poids").value);
+            let taille = document.getElementById("taille").value.replace(",", "."); // Correction de la virgule en point
             let morphologie = document.getElementById("morphologie").value;
             let yeux = document.getElementById("yeux").value;
             let experience = document.getElementById("experience").value;
@@ -90,7 +90,7 @@
                 affiliation = "Vous êtes affilié aux Arcturiens, une race très avancée en vibration sonore et énergétique.";
             } else if (morphologie === "Musclé" && yeux === "Vert") {
                 affiliation = "Vous êtes affilié aux Végaliens, des êtres puissants et bienveillants.";
-            } else if (poids < 60 && taille > 175) {
+            } else if (poids < 60 && parseFloat(taille) > 175) {
                 affiliation = "Vous êtes affilié aux Pléiadiens, une race évoluée à l’apparence élancée.";
             } else if (art === "Écriture" && experience === "Intermédiaire") {
                 affiliation = "Vous êtes affilié aux Lyriens, des êtres philosophes et connectés à l'expression écrite.";
