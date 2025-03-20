@@ -4,92 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test d'Affiliation Extraterrestre</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
+            text-align: center;
             background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
         }
         .container {
+            width: 50%;
+            margin: auto;
             background: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
+            animation: fadeIn 1s;
         }
-        h1 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        label {
-            font-weight: bold;
-            display: block;
-            margin-top: 10px;
-        }
-        input, select, button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            background-color: #28a745;
-            color: white;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-        button:hover {
-            background-color: #218838;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .result {
-            display: none;
+            background: #d4f5d4;
+            padding: 20px;
             margin-top: 20px;
-            padding: 15px;
-            background: #d4edda;
-            border-radius: 5px;
-            border: 1px solid #c3e6cb;
-            text-align: left;
+            border-radius: 10px;
+            display: none;
+            animation: fadeIn 1s;
+        }
+        button {
+            background: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .social-buttons {
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Test d'Affiliation Extraterrestre</h1>
+        <h1>Bienvenue sur le test d'affiliation extraterrestre !</h1>
         <p>Remplissez ce formulaire pour découvrir votre affiliation.</p>
-        
         <form id="affiliationForm">
-            <label for="nom">Nom :</label>
-            <input type="text" id="nom" required>
-            
-            <label for="age">Âge :</label>
-            <input type="number" id="age" required>
-            
-            <label for="yeux">Couleur des yeux :</label>
-            <select id="yeux">
-                <option value="Bleu">Bleu</option>
-                <option value="Vert">Vert</option>
-                <option value="Marron">Marron</option>
-                <option value="Gris">Gris</option>
-            </select>
-            
-            <label for="experience">Expérience spirituelle :</label>
-            <input type="text" id="experience" required>
-            
+            <label>Nom : <input type="text" id="nom" required></label><br>
+            <label>Âge : <input type="number" id="age" required></label><br>
+            <label>Couleur des yeux :
+                <select id="yeux">
+                    <option value="Bleu">Bleu</option>
+                    <option value="Vert">Vert</option>
+                    <option value="Noisette">Noisette</option>
+                    <option value="Autre">Autre</option>
+                </select>
+            </label><br>
+            <label>Expérience spirituelle : <input type="text" id="experience" required></label><br>
             <button type="submit">Envoyer</button>
         </form>
-        
-        <div class="result" id="resultat"></div>
+        <div id="result" class="result"></div>
     </div>
-    
+
     <script>
         document.getElementById("affiliationForm").addEventListener("submit", function(event) {
             event.preventDefault();
@@ -98,17 +74,52 @@
             let yeux = document.getElementById("yeux").value;
             let experience = document.getElementById("experience").value;
             
-            let resultatHTML = `
+            let affiliation = "";
+            if (yeux === "Bleu") {
+                affiliation = "Pléiadiens, une race spirituelle avancée.";
+            } else if (yeux === "Vert") {
+                affiliation = "Arcturiens, des êtres de sagesse et de lumière.";
+            } else if (yeux === "Noisette") {
+                affiliation = "Siriens, des êtres connectés aux énergies aquatiques.";
+            } else {
+                affiliation = "une race extraterrestre mystérieuse en quête de vérité.";
+            }
+
+            let resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = `
                 <h2>Résultat de votre affiliation :</h2>
                 <p><strong>Nom :</strong> ${nom}</p>
                 <p><strong>Âge :</strong> ${age} ans</p>
                 <p><strong>Couleur des yeux :</strong> ${yeux}</p>
                 <p><strong>Expérience spirituelle :</strong> ${experience}</p>
+                <h3>Affiliation :</h3>
+                <p>Vous êtes affilié aux <strong>${affiliation}</strong></p>
+                <button onclick="resetForm()" style="background:red;">Réessayer</button>
+                <div class="social-buttons">
+                    <p>Partagez votre résultat :</p>
+                    <a href="https://twitter.com/intent/tweet?text=Mon%20affiliation%20extraterrestre%20est%20${affiliation}" target="_blank">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=${window.location.href}" target="_blank">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </a>
+                </div>
             `;
-            
-            document.getElementById("resultat").innerHTML = resultatHTML;
-            document.getElementById("resultat").style.display = "block";
+            resultDiv.style.display = "block";
+            localStorage.setItem("lastResult", resultDiv.innerHTML);
         });
+
+        function resetForm() {
+            document.getElementById("affiliationForm").reset();
+            document.getElementById("result").style.display = "none";
+        }
+
+        window.onload = function() {
+            if (localStorage.getItem("lastResult")) {
+                document.getElementById("result").innerHTML = localStorage.getItem("lastResult");
+                document.getElementById("result").style.display = "block";
+            }
+        };
     </script>
 </body>
 </html>
