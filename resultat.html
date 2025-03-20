@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Résultat - Affiliation Extraterrestre</title>
+    <title>Résultat d'affiliation</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            color: white;
             text-align: center;
-            padding: 50px;
+            color: white;
             background-size: cover;
             background-position: center;
         }
-        
+
         #result-container {
             background: rgba(0, 0, 0, 0.7);
             padding: 20px;
@@ -21,30 +20,22 @@
             display: inline-block;
             width: 80%;
             max-width: 600px;
-        }
-        
-        h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-
-        #prompteur {
-            font-size: 16px;
-            margin-top: 20px;
-            height: 80px;
-            overflow: hidden;
-            white-space: nowrap;
-            display: block;
-        }
-
-        #message-scroll {
-            display: inline-block;
-            animation: scrollText 10s linear infinite;
+            margin: auto;
         }
 
         @keyframes scrollText {
             from { transform: translateX(100%); }
             to { transform: translateX(-100%); }
+        }
+
+        #prompteur {
+            font-size: 16px;
+            margin-top: 20px;
+            height: 50px;
+            overflow: hidden;
+            white-space: nowrap;
+            display: block;
+            animation: scrollText 10s linear infinite;
         }
     </style>
 </head>
@@ -56,53 +47,31 @@
         <p><strong>Âge :</strong> <span id="age"></span> ans</p>
         <p><strong>Affiliation :</strong> <span id="affiliation"></span></p>
         <p id="description"></p>
-
         <div id="prompteur">
             <span id="message-scroll"></span>
         </div>
     </div>
 
     <script>
-        function getQueryParams() {
+        function getParams() {
             let params = new URLSearchParams(window.location.search);
             return {
                 nom: params.get("nom"),
                 age: params.get("age"),
-                morphologie: params.get("morphologie"),
                 yeux: params.get("yeux"),
-                spiritualite: params.get("spiritualite"),
-                art: params.get("art")
+                spiritualite: params.get("spiritualite")
             };
         }
 
         function afficherResultat() {
-            let data = getQueryParams();
+            let data = getParams();
             document.getElementById("nom").innerText = data.nom;
             document.getElementById("age").innerText = data.age;
 
-            let affiliation = "Pléiadiens";
-            let bgImage = "pleiadiens.jpg";
-            let description = "";
-            let message = "";
-
-            if (data.yeux === "Vert") { 
-                affiliation = "Arcturiens"; 
-                bgImage = "arcturiens.jpg"; 
-                description = "Les Arcturiens sont des guides spirituels avancés, porteurs de sagesse et d'harmonie. Votre sensibilité énergétique vous permet de capter des fréquences subtiles.";
-                message = "Prenez le temps chaque jour de méditer en vous connectant à la lumière intérieure. Votre mission est de diffuser la paix et l'équilibre autour de vous.";
-            }
-            if (data.morphologie === "Athlétique") { 
-                affiliation = "Draconiens"; 
-                bgImage = "draconiens.jpg"; 
-                description = "Les Draconiens sont des guerriers spirituels puissants. Vous êtes doté d'une grande volonté et d'une capacité à surmonter les épreuves.";
-                message = "Développez votre force intérieure en cultivant la discipline et la maîtrise de soi. Trouvez un équilibre entre puissance et compassion.";
-            }
-            if (data.spiritualite === "Avancé") { 
-                affiliation = "Andromédiens"; 
-                bgImage = "andromediens.jpg"; 
-                description = "Les Andromédiens possèdent une vision cosmique et une intelligence émotionnelle profonde. Vous êtes un explorateur des dimensions supérieures.";
-                message = "Ouvrez votre conscience aux réalités multidimensionnelles en explorant la méditation profonde et la connexion à votre essence divine.";
-            }
+            let affiliation = "Arcturiens";
+            let bgImage = "arcturiens.jpg";
+            let description = "Vous êtes un être spirituel avancé en quête de sagesse cosmique.";
+            let message = "Méditez chaque jour pour vous connecter aux dimensions supérieures.";
 
             document.getElementById("affiliation").innerText = affiliation;
             document.getElementById("description").innerText = description;
