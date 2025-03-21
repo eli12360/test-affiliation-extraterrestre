@@ -86,8 +86,21 @@
         bgImage = "grandbleu.webp";
       }
 
+      // Vérification et correction du chemin des images
+      let imagePath = `images/${bgImage}`; // Par défaut, images sont dans "images/"
+      
+      // Si les images sont directement à la racine du projet, supprime "images/"
+      let testImage = new Image();
+      testImage.src = imagePath;
+      testImage.onload = function() {
+        document.body.style.backgroundImage = `url('${imagePath}')`;
+      };
+      testImage.onerror = function() {
+        console.error("Image non trouvée, correction du chemin...");
+        document.body.style.backgroundImage = `url('${bgImage}')`; // Si l'image n'est pas dans /images/
+      };
+
       document.getElementById("affiliation").innerText = affiliation;
-      document.body.style.backgroundImage = `url('images/${bgImage}')`;
     }
 
     window.onload = afficherResultat;
