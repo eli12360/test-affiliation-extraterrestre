@@ -66,9 +66,9 @@
       document.getElementById("age").innerText = data.age;
 
       let affiliation = "Affiliation indéterminée";
-      let bgImage = "default.webp";
+      let bgImage = "fondcosmique1.webp"; // Image par défaut
 
-      // Correspondances logiques
+      // Correspondance avec les images correctes
       if (data.spiritualite === "Avancé" && data.yeux === "Bleu") {
         affiliation = "Pléiadiens";
         bgImage = "pleiadiens.webp";
@@ -87,7 +87,7 @@
       }
 
       document.getElementById("affiliation").innerText = affiliation;
-      document.body.style.backgroundImage = `url('https://eli12360.github.io/test-affiliation-extraterrestre/images/${bgImage}')`;
+      document.body.style.backgroundImage = `url('images/${bgImage}')`;
     }
 
     window.onload = afficherResultat;
