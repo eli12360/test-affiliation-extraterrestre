@@ -14,6 +14,7 @@
       background-position: center;
       background-repeat: no-repeat;
       min-height: 100vh;
+      background-color: black;
     }
 
     #result-container {
@@ -65,24 +66,24 @@
       document.getElementById("age").innerText = data.age;
 
       let affiliation = "Affiliation indéterminée";
-      let bgImage = "images/default.jpg";
+      let bgImage = "./images/default.webp";
 
       // Exemple de correspondances logiques
       if (data.spiritualite === "Avancé" && data.yeux === "Bleu") {
         affiliation = "Pléiadiens";
-        bgImage = "images/pleiadiens.jpg";
+        bgImage = "./images/pleiadiens.webp";
       } else if (data.yeux === "Vert" || data.art === "Musique") {
         affiliation = "Arcturiens";
-        bgImage = "images/arcturiens.jpg";
+        bgImage = "./images/arcturiens.webp";
       } else if (data.morphologie === "Athlétique") {
         affiliation = "Draconiens";
-        bgImage = "images/draconiens.jpg";
+        bgImage = "./images/reptilien.webp";
       } else if (data.spiritualite === "Intermédiaire" && data.yeux === "Noisette") {
         affiliation = "Siriens";
-        bgImage = "images/siriens.jpg";
+        bgImage = "./images/siriens.webp";
       } else if (data.morphologie === "Minces" && data.art === "Peinture") {
         affiliation = "Grands Bleus";
-        bgImage = "images/grandsbleus.jpg";
+        bgImage = "./images/grandbleu.webp";
       }
 
       document.getElementById("affiliation").innerText = affiliation;
