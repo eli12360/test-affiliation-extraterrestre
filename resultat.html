@@ -66,30 +66,30 @@
       document.getElementById("age").innerText = data.age;
 
       let affiliation = "Affiliation indéterminée";
-      let bgImage = "./images/default.webp";
+      let bgImage = "default.webp";
 
-      // Exemple de correspondances logiques
+      // Correspondances logiques
       if (data.spiritualite === "Avancé" && data.yeux === "Bleu") {
         affiliation = "Pléiadiens";
-        bgImage = "./images/pleiadiens.webp";
+        bgImage = "pleiadiens.webp";
       } else if (data.yeux === "Vert" || data.art === "Musique") {
         affiliation = "Arcturiens";
-        bgImage = "./images/arcturiens.webp";
+        bgImage = "arcturiens.webp";
       } else if (data.morphologie === "Athlétique") {
         affiliation = "Draconiens";
-        bgImage = "./images/reptilien.webp";
+        bgImage = "reptilien.webp";
       } else if (data.spiritualite === "Intermédiaire" && data.yeux === "Noisette") {
         affiliation = "Siriens";
-        bgImage = "./images/siriens.webp";
+        bgImage = "siriens.webp";
       } else if (data.morphologie === "Minces" && data.art === "Peinture") {
         affiliation = "Grands Bleus";
-        bgImage = "./images/grandbleu.webp";
+        bgImage = "grandbleu.webp";
       }
 
       document.getElementById("affiliation").innerText = affiliation;
       document.body.style.backgroundImage = `url('https://eli12360.github.io/test-affiliation-extraterrestre/images/${bgImage}')`;
-
     }
+
     window.onload = afficherResultat;
   </script>
 
