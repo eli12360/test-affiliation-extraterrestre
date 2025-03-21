@@ -11,13 +11,24 @@
       text-align: center;
       padding: 50px;
       background-size: cover;
-      background-position: center;
+      background-position: center center; /* Centrage */
       background-repeat: no-repeat;
       min-height: 100vh;
       background-color: black;
     }
 
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4); /* Ajoute une couche sombre pour améliorer la lisibilité */
+    }
+
     #result-container {
+      position: relative;
+      z-index: 10;
       background: rgba(0, 0, 0, 0.7);
       padding: 20px 40px;
       border-radius: 15px;
@@ -38,6 +49,8 @@
   </style>
 </head>
 <body id="body">
+
+  <div id="overlay"></div> <!-- Superposition pour rendre le fond plus lisible -->
 
   <div id="result-container">
     <h2>Résultat de votre affiliation</h2>
@@ -77,7 +90,7 @@
         bgImage = "arcturiens.webp";
       } else if (data.morphologie === "Athlétique") {
         affiliation = "Draconiens";
-        bgImage = "reptilien.webp";
+        bgImage = "reptilien.webp"; // Vérifie bien que ton image Draconiens s'appelle "reptilien.webp"
       } else if (data.spiritualite === "Intermédiaire" && data.yeux === "Noisette") {
         affiliation = "Siriens";
         bgImage = "siriens.webp";
@@ -86,21 +99,8 @@
         bgImage = "grandbleu.webp";
       }
 
-      // Vérification et correction du chemin des images
-      let imagePath = `images/${bgImage}`; // Par défaut, images sont dans "images/"
-      
-      // Si les images sont directement à la racine du projet, supprime "images/"
-      let testImage = new Image();
-      testImage.src = imagePath;
-      testImage.onload = function() {
-        document.body.style.backgroundImage = `url('${imagePath}')`;
-      };
-      testImage.onerror = function() {
-        console.error("Image non trouvée, correction du chemin...");
-        document.body.style.backgroundImage = `url('${bgImage}')`; // Si l'image n'est pas dans /images/
-      };
-
       document.getElementById("affiliation").innerText = affiliation;
+      document.body.style.backgroundImage = `url('images/${bgImage}')`;
     }
 
     window.onload = afficherResultat;
