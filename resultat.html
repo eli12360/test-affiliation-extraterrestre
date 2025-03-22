@@ -105,6 +105,75 @@
 
     window.onload = afficherResultat;
   </script>
+// simulateur-cosmique.js
+// Simulateur d'influences galactiques hebdomadaires pour test d'affiliation
 
+const influencesCosmiques = [
+  {
+    semaine: '2025-03-17',
+    soleil: 'Éruption solaire modérée',
+    lune: 'Pleine Lune en Vierge',
+    schumann: '26 Hz',
+    portails: ['Pleiadiens', 'Arcturiens'],
+    conseil: "Pratiquez la méditation silencieuse pour intégrer les fréquences de guérison." 
+  },
+  {
+    semaine: '2025-03-24',
+    soleil: 'Calme solaire',
+    lune: 'Premier Quartier en Gémeaux',
+    schumann: '12 Hz stable',
+    portails: ['Siriens', 'Grands Bleus'],
+    conseil: "Canalisez par l’écriture intuitive ou les rêves lucides."
+  },
+  {
+    semaine: '2025-03-31',
+    soleil: 'Tempête solaire de classe X',
+    lune: 'Nouvelle Lune en Bélier',
+    schumann: '40+ Hz',
+    portails: ['Cristallins', 'Andromédiens'],
+    conseil: "Marchez pieds nus dans la nature et visualisez des vortex de lumière."
+  }
+];
+
+function getSemaineActuelle() {
+  const now = new Date();
+  const lundi = new Date(now.setDate(now.getDate() - now.getDay() + 1));
+  return lundi.toISOString().split('T')[0];
+}
+
+function getInfluenceGalactique() {
+  const semaine = getSemaineActuelle();
+  const influence = influencesCosmiques.find(i => i.semaine === semaine);
+  return influence || {
+    soleil: 'Activité solaire faible',
+    lune: 'Lune décroissante',
+    schumann: '14 Hz',
+    portails: ['Neutre'],
+    conseil: "Reposez-vous et ancrez-vous dans le corps physique."
+  };
+}
+
+function afficherInfluenceCosmique() {
+  const influence = getInfluenceGalactique();
+
+  const bloc = document.createElement('div');
+  bloc.style.marginTop = '30px';
+  bloc.style.background = 'rgba(255,255,255,0.1)';
+  bloc.style.padding = '20px';
+  bloc.style.borderRadius = '15px';
+  bloc.style.color = 'white';
+
+  bloc.innerHTML = `
+    <h3>Influences Cosmiques Actuelles</h3>
+    <p><strong>☀️ Activité Solaire :</strong> ${influence.soleil}</p>
+    <p><strong>🌕 Phase Lunaire :</strong> ${influence.lune}</p>
+    <p><strong>🔌 Résonance de Schumann :</strong> ${influence.schumann}</p>
+    <p><strong>✨ Portails Galactiques Actifs :</strong> ${influence.portails.join(', ')}</p>
+    <p><strong>💡 Conseil :</strong> ${influence.conseil}</p>
+  `;
+
+  document.body.appendChild(bloc);
+}
+window.onload = afficherInfluenceCosmique;
 </body>
 </html>
