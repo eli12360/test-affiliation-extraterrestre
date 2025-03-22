@@ -2,11 +2,11 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Résultat - Affiliation Extraterrestre</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: Arial, sans-serif;
       color: white;
       text-align: center;
       padding: 50px;
@@ -15,40 +15,37 @@
       background-repeat: no-repeat;
       min-height: 100vh;
       background-color: black;
-      transition: background-image 2s ease-in-out;
     }
 
     #result-container {
-      background: rgba(0, 0, 0, 0.75);
-      padding: 30px 50px;
-      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px 40px;
+      border-radius: 15px;
       display: inline-block;
-      max-width: 750px;
+      max-width: 800px;
       margin: auto;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-      animation: fadeIn 1.5s ease-in-out;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
     }
 
     h2 {
-      font-size: 28px;
       margin-bottom: 25px;
     }
 
     p {
-      font-size: 19px;
-      margin: 12px 0;
+      font-size: 18px;
+      margin: 10px 0;
     }
 
-    .highlight {
+    .titre-affiliation {
+      font-weight: bold;
       font-size: 20px;
       color: #00ffff;
-      font-weight: bold;
       margin-top: 20px;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .message-affiliation {
+      font-size: 17px;
+      margin-top: 15px;
     }
   </style>
 </head>
@@ -58,8 +55,8 @@
     <h2>🛸 Résultat de votre affiliation 🛸</h2>
     <p><strong>Nom :</strong> <span id="nom"></span></p>
     <p><strong>Âge :</strong> <span id="age"></span> ans</p>
-    <p class="highlight"><strong>Affiliation :</strong> <span id="affiliation"></span></p>
-    <p id="message"></p>
+    <p class="titre-affiliation" id="affiliation"></p>
+    <p class="message-affiliation" id="message"></p>
   </div>
 
   <script>
@@ -77,37 +74,40 @@
 
     function afficherResultat() {
       const data = getQueryParams();
-
       document.getElementById("nom").innerText = data.nom;
       document.getElementById("age").innerText = data.age;
 
       let affiliation = "Affiliation indéterminée";
-      let bgImage = "default.webp";
       let message = "Vous êtes un explorateur galactique à la recherche de votre essence originelle.";
+      let bgImage = "default.webp";
 
       if (data.spiritualite === "Avancé" && data.yeux === "Bleu") {
-        affiliation = "Pléiadiens – Porteurs de Conscience Stellaire";
+        affiliation = "Pléiadiens – Messagers de l’Amour Cosmique";
+        message = "Votre cœur est une antenne multidimensionnelle. Vous êtes guidé(e) par la douceur, la guérison et l’unité.";
         bgImage = "pleiadiens.webp";
-        message = "Vous êtes un phare de lumière. En période d'alignement cosmique, votre cœur devient un portail vers d'autres dimensions. Vous êtes guidé par la douceur et l'harmonie céleste.";
       } else if (data.yeux === "Vert" || data.art === "Musique") {
-        affiliation = "Arcturiens – Gardiens de la Sagesse Quantique";
+        affiliation = "Arcturiens – Gardiens de la Conscience Universelle";
+        message = "Votre mental est affûté, votre intuition profonde. Vous incarnez l’intelligence cosmique et la sagesse interstellaire.";
         bgImage = "arcturiens.webp";
-        message = "Votre mental est une antenne cosmique. Les tempêtes solaires amplifient votre pouvoir de transmission d’informations galactiques. La musique devient pour vous un langage interstellaire.";
       } else if (data.morphologie === "Athlétique") {
         affiliation = "Draconiens – Gardiens de la Puissance Primordiale";
+        message = "Vous incarnez une force de transformation. Lors des tempêtes géomagnétiques, vous transmutez l’ombre en lumière.";
         bgImage = "reptilien.webp";
-        message = "Vous incarnez une force de transformation. Lors des tempêtes géomagnétiques, vous transmutez l’ombre en lumière. Votre corps énergétique capte les fréquences subtiles des réalignements cosmiques.";
       } else if (data.spiritualite === "Intermédiaire" && data.yeux === "Noisette") {
-        affiliation = "Siriens – Architectes des Mondes de Lumière";
-        bgImage = "siriens.webp";
-        message = "Vous êtes un bâtisseur d'équilibres. Lors des portails lunaires ou éclipses, vous recevez des visions claires pour co-créer la Nouvelle Terre.";
+        affiliation = "Siriens – Guides des Mondes Aquatiques et de la Sagesse";
+        message = "Votre lien à l’eau, aux rêves, et aux mémoires anciennes vous rend apte à guérir les lignes temporelles.";
+        bgImage = "sirien.webp";
       } else if (data.morphologie === "Minces" && data.art === "Peinture") {
-        affiliation = "Grands Bleus – Enseignants de la Fréquence Originelle";
+        affiliation = "Grands Bleus – Architectes de l’Équilibre Cosmique";
+        message = "Votre énergie apaise et restructure les champs de conscience collectifs. Vous œuvrez à l’harmonie galactique.";
         bgImage = "grandbleu.webp";
-        message = "Votre aura inspire l'harmonie. Vous canalisez l’essence de l’univers à travers vos créations. Lors des hausses de résonance de Schumann, votre intuition s’amplifie.";
+      } else if (data.yeux === "Marron" && data.morphologie === "Normal" && data.spiritualite === "Avancé" && data.art === "Peinture") {
+        affiliation = "Prêtresse du Feu – Lignée des Chamans Stellaire";
+        message = "Vous canalisez l’énergie ignée des soleils sacrés. Dans chaque cycle solaire, vous activez les portails de transmutation.";
+        bgImage = "cristallin.webp";
       }
 
-      document.getElementById("affiliation").innerText = affiliation;
+      document.getElementById("affiliation").innerText = `Affiliation : ${affiliation}`;
       document.getElementById("message").innerText = message;
       document.body.style.backgroundImage = `url('images/${bgImage}')`;
     }
