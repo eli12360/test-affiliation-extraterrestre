@@ -1,102 +1,109 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test d'Affiliation Extraterrestre</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; background-color: #f4f4f4; }
-        h2 { color: #333; }
-        form { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
-        label { display: block; margin-top: 10px; }
-        input, select { width: 100%; padding: 8px; margin-top: 5px; }
-        button { background: #4CAF50; color: white; padding: 10px; margin-top: 20px; border: none; cursor: pointer; }
-        button:hover { background: #45a049; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test d'Affiliation Cosmique</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #eee;
+      text-align: center;
+      padding: 40px;
+    }
+    form {
+      background-color: #222;
+      padding: 30px;
+      border-radius: 10px;
+      display: inline-block;
+      text-align: left;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    select, input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #44c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
+  <h1>Test d'Affiliation Cosmique</h1>
+  <form onsubmit="envoyerReponses(this)" action="resultat.html" method="GET">
 
-    <h2>Test d'Affiliation Extraterrestre</h2>
-    <form id="affiliationForm">
-        <label>Nom :</label>
-        <input type="text" id="nom" required>
+    <label for="nom">Nom</label>
+    <input type="text" name="nom" id="nom" required>
 
-        <label>Âge :</label>
-        <input type="number" id="age" required>
+    <label for="age">Âge</label>
+    <input type="number" name="age" id="age" required>
 
-        <label>Poids (kg) :</label>
-        <input type="number" id="poids" required>
+    <label for="yeux">Couleur des yeux</label>
+    <select name="yeux" id="yeux">
+      <option value="Bleu">Bleu</option>
+      <option value="Vert">Vert</option>
+      <option value="Noisette">Noisette</option>
+      <option value="Marron">Marron</option>
+      <option value="Gris">Gris</option>
+    </select>
 
-        <label>Taille (cm) :</label>
-        <input type="number" id="taille" required>
+    <label for="morphologie">Morphologie</label>
+    <select name="morphologie" id="morphologie">
+      <option value="Minces">Minces</option>
+      <option value="Normale">Normale</option>
+      <option value="Athlétique">Athlétique</option>
+      <option value="Forte">Forte</option>
+    </select>
 
-        <label>Apparence morphologique :</label>
-        <select id="morphologie">
-            <option value="Mince">Mince</option>
-            <option value="Athlétique">Athlétique</option>
-            <option value="Enrobé">Enrobé</option>
-            <option value="Autre">Autre</option>
-        </select>
+    <label for="spiritualite">Niveau de spiritualité</label>
+    <select name="spiritualite" id="spiritualite">
+      <option value="Débutant">Débutant</option>
+      <option value="Intermédiaire">Intermédiaire</option>
+      <option value="Avancé">Avancé</option>
+    </select>
 
-        <label>Couleur des yeux :</label>
-        <select id="yeux">
-            <option value="Bleu">Bleu</option>
-            <option value="Vert">Vert</option>
-            <option value="Noisette">Noisette</option>
-            <option value="Marron">Marron</option>
-            <option value="Autre">Autre</option>
-        </select>
+    <label for="art">Domaine artistique préféré</label>
+    <select name="art" id="art">
+      <option value="Musique">Musique</option>
+      <option value="Peinture">Peinture</option>
+      <option value="Écriture">Écriture</option>
+      <option value="Danse">Danse</option>
+      <option value="Aucun">Aucun</option>
+    </select>
 
-        <label>Expérience spirituelle :</label>
-        <select id="spiritualite">
-            <option value="Débutant">Débutant</option>
-            <option value="Intermédiaire">Intermédiaire</option>
-            <option value="Avancé">Avancé</option>
-        </select>
+    <!-- 🧠 NOUVEAUX CHAMPS -->
 
-        <label>Goût artistique :</label>
-        <select id="art">
-            <option value="Musique">Musique</option>
-            <option value="Peinture">Peinture</option>
-            <option value="Écriture">Écriture</option>
-            <option value="Autre">Autre</option>
-        </select>
+    <label for="intuition">Type d’intuition dominant</label>
+    <select name="intuition" id="intuition">
+      <option value="clairvoyance">Clairvoyance</option>
+      <option value="clairaudience">Clairaudience</option>
+      <option value="clairsentience">Clairsentience</option>
+      <option value="canalisation">Canalisation</option>
+      <option value="autre">Autre</option>
+    </select>
 
-        <label>Attrait pour les technologies avancées :</label>
-        <select id="technologie">
-            <option value="Oui">Oui</option>
-            <option value="Non">Non</option>
-            <option value="Curieux mais prudent">Curieux mais prudent</option>
-        </select>
+    <label for="cosmique">Sensibilité aux événements cosmiques ?</label>
+    <select name="cosmique" id="cosmique">
+      <option value="oui">Oui</option>
+      <option value="non">Non</option>
+      <option value="parfois">Parfois</option>
+    </select>
 
-        <label>Relation aux figures d’autorité :</label>
-        <select id="autorite">
-            <option value="Respect total">Respect total</option>
-            <option value="Indépendant">Indépendant</option>
-            <option value="Rébellion">Rébellion</option>
-        </select>
-
-        <button type="button" onclick="envoyerResultat()">Envoyer</button>
-    </form>
-
-    <script>
-        function envoyerResultat() {
-            let nom = document.getElementById("nom").value;
-            let age = document.getElementById("age").value;
-            let poids = document.getElementById("poids").value;
-            let taille = document.getElementById("taille").value;
-            let morphologie = document.getElementById("morphologie").value;
-            let yeux = document.getElementById("yeux").value;
-            let spiritualite = document.getElementById("spiritualite").value;
-            let art = document.getElementById("art").value;
-            let technologie = document.getElementById("technologie").value;
-            let autorite = document.getElementById("autorite").value;
-
-            let params = `nom=${nom}&age=${age}&poids=${poids}&taille=${taille}&morphologie=${morphologie}&yeux=${yeux}&spiritualite=${spiritualite}&art=${art}&technologie=${technologie}&autorite=${autorite}`;
-            
-            window.location.href = "resultat.html?" + params;
-        }
-    </script>
-
+    <button type="submit">Envoyer</button>
+  </form>
 </body>
 </html>
