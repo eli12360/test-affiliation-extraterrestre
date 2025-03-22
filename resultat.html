@@ -22,7 +22,7 @@
       padding: 20px 40px;
       border-radius: 15px;
       display: inline-block;
-      max-width: 800px;
+      max-width: 700px;
       margin: auto;
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
     }
@@ -35,28 +35,17 @@
       font-size: 18px;
       margin: 10px 0;
     }
-
-    .titre-affiliation {
-      font-weight: bold;
-      font-size: 20px;
-      color: #00ffff;
-      margin-top: 20px;
-    }
-
-    .message-affiliation {
-      font-size: 17px;
-      margin-top: 15px;
-    }
   </style>
 </head>
 <body id="body">
 
   <div id="result-container">
-    <h2>🛸 Résultat de votre affiliation 🛸</h2>
+    <h2>Résultat de votre affiliation</h2>
     <p><strong>Nom :</strong> <span id="nom"></span></p>
     <p><strong>Âge :</strong> <span id="age"></span> ans</p>
-    <p class="titre-affiliation" id="affiliation"></p>
-    <p class="message-affiliation" id="message"></p>
+    <p><strong>Affiliation :</strong> <span id="affiliation"></span></p>
+    <p><strong>Type d'intuition :</strong> <span id="intuition"></span></p>
+    <p><strong>Sensibilité cosmique :</strong> <span id="cosmique"></span></p>
   </div>
 
   <script>
@@ -68,48 +57,42 @@
         morphologie: params.get("morphologie") || "",
         yeux: params.get("yeux") || "",
         spiritualite: params.get("spiritualite") || "",
-        art: params.get("art") || ""
+        art: params.get("art") || "",
+        intuition: params.get("intuition") || "Non renseigné",
+        cosmique: params.get("cosmique") || "Non précisé"
       };
     }
 
     function afficherResultat() {
       const data = getQueryParams();
+
       document.getElementById("nom").innerText = data.nom;
       document.getElementById("age").innerText = data.age;
+      document.getElementById("intuition").innerText = data.intuition;
+      document.getElementById("cosmique").innerText = data.cosmique;
 
       let affiliation = "Affiliation indéterminée";
-      let message = "Vous êtes un explorateur galactique à la recherche de votre essence originelle.";
-      let bgImage = "default.webp";
+      let bgImage = "images/default.webp";
 
       if (data.spiritualite === "Avancé" && data.yeux === "Bleu") {
-        affiliation = "Pléiadiens – Messagers de l’Amour Cosmique";
-        message = "Votre cœur est une antenne multidimensionnelle. Vous êtes guidé(e) par la douceur, la guérison et l’unité.";
-        bgImage = "pleiadiens.webp";
+        affiliation = "Pléiadiens";
+        bgImage = "images/pleiadiens.webp";
       } else if (data.yeux === "Vert" || data.art === "Musique") {
-        affiliation = "Arcturiens – Gardiens de la Conscience Universelle";
-        message = "Votre mental est affûté, votre intuition profonde. Vous incarnez l’intelligence cosmique et la sagesse interstellaire.";
-        bgImage = "arcturiens.webp";
+        affiliation = "Arcturiens";
+        bgImage = "images/arcturiens.webp";
       } else if (data.morphologie === "Athlétique") {
-        affiliation = "Draconiens – Gardiens de la Puissance Primordiale";
-        message = "Vous incarnez une force de transformation. Lors des tempêtes géomagnétiques, vous transmutez l’ombre en lumière.";
-        bgImage = "reptilien.webp";
+        affiliation = "Draconiens";
+        bgImage = "images/reptilien.webp";
       } else if (data.spiritualite === "Intermédiaire" && data.yeux === "Noisette") {
-        affiliation = "Siriens – Guides des Mondes Aquatiques et de la Sagesse";
-        message = "Votre lien à l’eau, aux rêves, et aux mémoires anciennes vous rend apte à guérir les lignes temporelles.";
-        bgImage = "sirien.webp";
+        affiliation = "Siriens";
+        bgImage = "images/siriens.webp";
       } else if (data.morphologie === "Minces" && data.art === "Peinture") {
-        affiliation = "Grands Bleus – Architectes de l’Équilibre Cosmique";
-        message = "Votre énergie apaise et restructure les champs de conscience collectifs. Vous œuvrez à l’harmonie galactique.";
-        bgImage = "grandbleu.webp";
-      } else if (data.yeux === "Marron" && data.morphologie === "Normal" && data.spiritualite === "Avancé" && data.art === "Peinture") {
-        affiliation = "Prêtresse du Feu – Lignée des Chamans Stellaire";
-        message = "Vous canalisez l’énergie ignée des soleils sacrés. Dans chaque cycle solaire, vous activez les portails de transmutation.";
-        bgImage = "cristallin.webp";
+        affiliation = "Grands Bleus";
+        bgImage = "images/grandbleu.webp";
       }
 
-      document.getElementById("affiliation").innerText = `Affiliation : ${affiliation}`;
-      document.getElementById("message").innerText = message;
-      document.body.style.backgroundImage = `url('images/${bgImage}')`;
+      document.getElementById("affiliation").innerText = affiliation;
+      document.body.style.backgroundImage = `url('${bgImage}')`;
     }
 
     window.onload = afficherResultat;
