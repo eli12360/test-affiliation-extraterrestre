@@ -11,24 +11,13 @@
       text-align: center;
       padding: 50px;
       background-size: cover;
-      background-position: center center; /* Centrage */
+      background-position: center;
       background-repeat: no-repeat;
       min-height: 100vh;
       background-color: black;
     }
 
-    #overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.4); /* Ajoute une couche sombre pour améliorer la lisibilité */
-    }
-
     #result-container {
-      position: relative;
-      z-index: 10;
       background: rgba(0, 0, 0, 0.7);
       padding: 20px 40px;
       border-radius: 15px;
@@ -50,8 +39,6 @@
 </head>
 <body id="body">
 
-  <div id="overlay"></div> <!-- Superposition pour rendre le fond plus lisible -->
-
   <div id="result-container">
     <h2>Résultat de votre affiliation</h2>
     <p><strong>Nom :</strong> <span id="nom"></span></p>
@@ -65,115 +52,75 @@
       return {
         nom: params.get("nom") || "Inconnu",
         age: params.get("age") || "Non précisé",
-        morphologie: params.get("morphologie") || "",
         yeux: params.get("yeux") || "",
         spiritualite: params.get("spiritualite") || "",
-        art: params.get("art") || ""
+        morphologie: params.get("morphologie") || "",
+        art: params.get("art") || "",
+        contexte: params.get("contexte") || ""
       };
     }
 
+    const messages = {
+      Pleiadiens: {
+        titre: "Pléiadiens – Messagers de Lumière Stellaire",
+        message: "Vous êtes appelés à guider les autres avec amour, douceur et intuition. Votre mission s’amplifie durant les équinoxes et les pics de lumière. Les pleins soleils et les alignements planétaires réactivent vos mémoires célestes.",
+        image: "images/pleiadiens.webp"
+      },
+      Arcturiens: {
+        titre: "Arcturiens – Architectes de la Conscience Cristalline",
+        message: "Vous excellez dans la sagesse galactique, la géométrie sacrée, et la maîtrise du mental. Les tempêtes solaires activent votre puissance intérieure et votre télépathie. Canalisez des enseignements multidimensionnels durant ces phases.",
+        image: "images/arcturiens.webp"
+      },
+      Siriens: {
+        titre: "Siriens – Porteurs des Archives Akashiques",
+        message: "Les énergies lunaires, surtout les pleines lunes, vous connectent à vos mémoires galactiques. Vous êtes des guides naturels vers l’Unité et l’harmonie vibratoire. Plongez dans la méditation pour recevoir vos codes.",
+        image: "images/siriens.webp"
+      },
+      Draconiens: {
+        titre: "Draconiens – Gardiens de la Puissance Primordiale",
+        message: "Vous incarnez une force de transformation. Lors des tempêtes géomagnétiques, vous transmutez l’ombre en lumière. Votre corps énergétique capte les fréquences subtiles des réalignements cosmiques.",
+        image: "images/draco.png"
+      },
+      GrandsBleus: {
+        titre: "Grands Bleus – Gardiens de l’Équilibre Cosmique",
+        message: "Durant les portails énergétiques et les résonances de Schumann, vous êtes appelés à ancrer l’harmonie sur Terre. Votre fréquence calme les tempêtes internes et collectives.",
+        image: "images/grandbleu.webp"
+      }
+    };
+
     function afficherResultat() {
       const data = getQueryParams();
+      let affiliation = "Pleiadiens";
+      let contexte = data.contexte.toLowerCase();
+
+      // Logique de base
+      if (data.spiritualite === "Avancé" && data.yeux === "Bleu") affiliation = "Pleiadiens";
+      if (data.yeux === "Vert" || data.art === "Musique") affiliation = "Arcturiens";
+      if (data.morphologie === "Athlétique") affiliation = "Draconiens";
+      if (data.spiritualite === "Intermédiaire" && data.yeux === "Noisette") affiliation = "Siriens";
+      if (data.morphologie === "Minces" && data.art === "Peinture") affiliation = "GrandsBleus";
+
+      // Influence cosmique temporaire
+      if (contexte.includes("pleine lune")) affiliation = "Siriens";
+      if (contexte.includes("tempête solaire")) affiliation = "Arcturiens";
+      if (contexte.includes("schumann")) affiliation = "GrandsBleus";
+      if (contexte.includes("équinoxe")) affiliation = "Pleiadiens";
+
+      const result = messages[affiliation];
 
       document.getElementById("nom").innerText = data.nom;
       document.getElementById("age").innerText = data.age;
+      document.getElementById("affiliation").innerText = result.titre;
+      document.body.style.backgroundImage = `url('${result.image}')`;
 
-      let affiliation = "Affiliation indéterminée";
-      let bgImage = "fondcosmique1.webp"; // Image par défaut
-
-      // Correspondance avec les images correctes
-      if (data.spiritualite === "Avancé" && data.yeux === "Bleu") {
-        affiliation = "Pléiadiens";
-        bgImage = "pleiadiens.webp";
-      } else if (data.yeux === "Vert" || data.art === "Musique") {
-        affiliation = "Arcturiens";
-        bgImage = "arcturiens.webp";
-      } else if (data.morphologie === "Athlétique") {
-        affiliation = "Draconiens";
-        bgImage = "reptilien.webp"; // Vérifie bien que ton image Draconiens s'appelle "reptilien.webp"
-      } else if (data.spiritualite === "Intermédiaire" && data.yeux === "Noisette") {
-        affiliation = "Siriens";
-        bgImage = "siriens.webp";
-      } else if (data.morphologie === "Minces" && data.art === "Peinture") {
-        affiliation = "Grands Bleus";
-        bgImage = "grandbleu.webp";
-      }
-
-      document.getElementById("affiliation").innerText = affiliation;
-      document.body.style.backgroundImage = `url('images/${bgImage}')`;
+      const messageElement = document.createElement("p");
+      messageElement.innerText = result.message;
+      messageElement.style.marginTop = "20px";
+      document.getElementById("result-container").appendChild(messageElement);
     }
 
     window.onload = afficherResultat;
   </script>
-// simulateur-cosmique.js
-// Simulateur d'influences galactiques hebdomadaires pour test d'affiliation
 
-const influencesCosmiques = [
-  {
-    semaine: '2025-03-17',
-    soleil: 'Éruption solaire modérée',
-    lune: 'Pleine Lune en Vierge',
-    schumann: '26 Hz',
-    portails: ['Pleiadiens', 'Arcturiens'],
-    conseil: "Pratiquez la méditation silencieuse pour intégrer les fréquences de guérison." 
-  },
-  {
-    semaine: '2025-03-24',
-    soleil: 'Calme solaire',
-    lune: 'Premier Quartier en Gémeaux',
-    schumann: '12 Hz stable',
-    portails: ['Siriens', 'Grands Bleus'],
-    conseil: "Canalisez par l’écriture intuitive ou les rêves lucides."
-  },
-  {
-    semaine: '2025-03-31',
-    soleil: 'Tempête solaire de classe X',
-    lune: 'Nouvelle Lune en Bélier',
-    schumann: '40+ Hz',
-    portails: ['Cristallins', 'Andromédiens'],
-    conseil: "Marchez pieds nus dans la nature et visualisez des vortex de lumière."
-  }
-];
-
-function getSemaineActuelle() {
-  const now = new Date();
-  const lundi = new Date(now.setDate(now.getDate() - now.getDay() + 1));
-  return lundi.toISOString().split('T')[0];
-}
-
-function getInfluenceGalactique() {
-  const semaine = getSemaineActuelle();
-  const influence = influencesCosmiques.find(i => i.semaine === semaine);
-  return influence || {
-    soleil: 'Activité solaire faible',
-    lune: 'Lune décroissante',
-    schumann: '14 Hz',
-    portails: ['Neutre'],
-    conseil: "Reposez-vous et ancrez-vous dans le corps physique."
-  };
-}
-
-function afficherInfluenceCosmique() {
-  const influence = getInfluenceGalactique();
-
-  const bloc = document.createElement('div');
-  bloc.style.marginTop = '30px';
-  bloc.style.background = 'rgba(255,255,255,0.1)';
-  bloc.style.padding = '20px';
-  bloc.style.borderRadius = '15px';
-  bloc.style.color = 'white';
-
-  bloc.innerHTML = `
-    <h3>Influences Cosmiques Actuelles</h3>
-    <p><strong>☀️ Activité Solaire :</strong> ${influence.soleil}</p>
-    <p><strong>🌕 Phase Lunaire :</strong> ${influence.lune}</p>
-    <p><strong>🔌 Résonance de Schumann :</strong> ${influence.schumann}</p>
-    <p><strong>✨ Portails Galactiques Actifs :</strong> ${influence.portails.join(', ')}</p>
-    <p><strong>💡 Conseil :</strong> ${influence.conseil}</p>
-  `;
-
-  document.body.appendChild(bloc);
-}
-window.onload = afficherInfluenceCosmique;
 </body>
 </html>
