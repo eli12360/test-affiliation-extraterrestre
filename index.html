@@ -1,109 +1,113 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test d'Affiliation Cosmique</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Test d'affiliation galactique</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #111;
-      color: #eee;
-      text-align: center;
-      padding: 40px;
+      padding: 30px;
+      background: linear-gradient(to right, #000428, #004e92);
+      color: white;
     }
     form {
-      background-color: #222;
+      max-width: 600px;
+      margin: auto;
+      background: rgba(0,0,0,0.7);
       padding: 30px;
-      border-radius: 10px;
-      display: inline-block;
-      text-align: left;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
     }
     label {
       display: block;
-      margin-top: 15px;
-      font-weight: bold;
+      margin: 15px 0 5px;
     }
-    select, input {
+    input, select, textarea {
       width: 100%;
       padding: 8px;
-      margin-top: 5px;
-      border-radius: 5px;
+      margin-bottom: 10px;
+      border-radius: 8px;
       border: none;
     }
+    .checkbox-group {
+      margin-bottom: 15px;
+    }
+    .checkbox-group label {
+      display: inline-block;
+      margin-right: 10px;
+    }
     button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #44c;
+      padding: 12px 20px;
+      background-color: #00c3ff;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>Test d'Affiliation Cosmique</h1>
-  <form onsubmit="envoyerReponses(this)" action="resultat.html" method="GET">
 
-    <label for="nom">Nom</label>
-    <input type="text" name="nom" id="nom" required>
+  <form id="formulaire" action="resultat.html" method="GET">
+    <h2>Test d'affiliation galactique</h2>
 
-    <label for="age">Âge</label>
-    <input type="number" name="age" id="age" required>
+    <label for="nom">Nom :</label>
+    <input type="text" name="nom" required />
 
-    <label for="yeux">Couleur des yeux</label>
-    <select name="yeux" id="yeux">
+    <label for="age">Âge :</label>
+    <input type="number" name="age" required />
+
+    <label for="yeux">Couleur des yeux :</label>
+    <select name="yeux">
       <option value="Bleu">Bleu</option>
       <option value="Vert">Vert</option>
       <option value="Noisette">Noisette</option>
       <option value="Marron">Marron</option>
-      <option value="Gris">Gris</option>
     </select>
 
-    <label for="morphologie">Morphologie</label>
-    <select name="morphologie" id="morphologie">
+    <label for="morphologie">Morphologie :</label>
+    <select name="morphologie">
       <option value="Minces">Minces</option>
-      <option value="Normale">Normale</option>
+      <option value="Normal">Normal</option>
       <option value="Athlétique">Athlétique</option>
-      <option value="Forte">Forte</option>
     </select>
 
-    <label for="spiritualite">Niveau de spiritualité</label>
-    <select name="spiritualite" id="spiritualite">
+    <label for="spiritualite">Niveau de spiritualité :</label>
+    <select name="spiritualite">
       <option value="Débutant">Débutant</option>
       <option value="Intermédiaire">Intermédiaire</option>
       <option value="Avancé">Avancé</option>
     </select>
 
-    <label for="art">Domaine artistique préféré</label>
-    <select name="art" id="art">
+    <label for="art">Expression artistique :</label>
+    <select name="art">
+      <option value="Aucune">Aucune</option>
       <option value="Musique">Musique</option>
       <option value="Peinture">Peinture</option>
       <option value="Écriture">Écriture</option>
-      <option value="Danse">Danse</option>
-      <option value="Aucun">Aucun</option>
     </select>
 
-    <!-- 🧠 NOUVEAUX CHAMPS -->
-
-    <label for="intuition">Type d’intuition dominant</label>
-    <select name="intuition" id="intuition">
-      <option value="clairvoyance">Clairvoyance</option>
-      <option value="clairaudience">Clairaudience</option>
-      <option value="clairsentience">Clairsentience</option>
-      <option value="canalisation">Canalisation</option>
-      <option value="autre">Autre</option>
+    <!-- NOUVEAUX CHAMPS -->
+    <label for="intuition">Type d’intuition dominante :</label>
+    <select name="intuition">
+      <option value="Clairvoyance">Clairvoyance</option>
+      <option value="Clairaudience">Clairaudience</option>
+      <option value="Clairsentience">Clairsentience</option>
+      <option value="Télépathie">Télépathie</option>
+      <option value="Canalisation">Canalisation</option>
     </select>
 
-    <label for="cosmique">Sensibilité aux événements cosmiques ?</label>
-    <select name="cosmique" id="cosmique">
-      <option value="oui">Oui</option>
-      <option value="non">Non</option>
-      <option value="parfois">Parfois</option>
-    </select>
+    <label>Sensibilité aux événements cosmiques :</label>
+    <div class="checkbox-group">
+      <label><input type="checkbox" name="cosmos[]" value="Éruptions solaires" /> Éruptions solaires</label>
+      <label><input type="checkbox" name="cosmos[]" value="Résonance de Schumann" /> Résonance de Schumann</label>
+      <label><input type="checkbox" name="cosmos[]" value="Alignements planétaires" /> Alignements planétaires</label>
+      <label><input type="checkbox" name="cosmos[]" value="Portails énergétiques" /> Portails énergétiques</label>
+    </div>
 
     <button type="submit">Envoyer</button>
   </form>
+
 </body>
 </html>
