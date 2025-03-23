@@ -44,8 +44,8 @@
     <p><strong>Nom :</strong> <span id="nom"></span></p>
     <p><strong>Âge :</strong> <span id="age"></span> ans</p>
     <p><strong>Affiliation :</strong> <span id="affiliation"></span></p>
-    <p><strong>Type d'intuition :</strong> <span id="intuition"></span></p>
-    <p><strong>Sensibilité cosmique :</strong> <span id="cosmique"></span></p>
+    <p><strong>Intuition :</strong> <span id="intuition"></span></p>
+    <p><strong>Sensibilité cosmique :</strong> <span id="cosmos"></span></p>
   </div>
 
   <script>
@@ -58,8 +58,8 @@
         yeux: params.get("yeux") || "",
         spiritualite: params.get("spiritualite") || "",
         art: params.get("art") || "",
-        intuition: params.get("intuition") || "Non renseigné",
-        cosmique: params.get("cosmique") || "Non précisé"
+        intuition: params.get("intuition") || "",
+        cosmos: params.getAll("cosmos[]") || []
       };
     }
 
@@ -69,11 +69,12 @@
       document.getElementById("nom").innerText = data.nom;
       document.getElementById("age").innerText = data.age;
       document.getElementById("intuition").innerText = data.intuition;
-      document.getElementById("cosmique").innerText = data.cosmique;
+      document.getElementById("cosmos").innerText = data.cosmos.join(", ");
 
       let affiliation = "Affiliation indéterminée";
       let bgImage = "images/default.webp";
 
+      // Exemple de correspondances logiques
       if (data.spiritualite === "Avancé" && data.yeux === "Bleu") {
         affiliation = "Pléiadiens";
         bgImage = "images/pleiadiens.webp";
