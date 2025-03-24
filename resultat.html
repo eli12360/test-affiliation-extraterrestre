@@ -72,9 +72,9 @@
       document.getElementById("cosmos").innerText = data.cosmos.join(", ");
 
       let affiliation = "Affiliation indéterminée";
-      let bgImage = "images/default.webp";
+      let bgImage = "images/default.webp"; // Veille à bien avoir ce fichier
 
-      // Exemple de correspondances logiques
+      // Règles d'affiliation
       if (data.spiritualite === "Avancé" && data.yeux === "Bleu") {
         affiliation = "Pléiadiens";
         bgImage = "images/pleiadiens.webp";
